@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allegra Bourne - Software Engineer & Data Scientist</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            margin-top: -50px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.3rem 0;
+            color: #666;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .project-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: #e9ecef;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .project-links a:hover {
+            background: #5a6fd8;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-left: 1rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .experience-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .experience-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Allegra Bourne</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iMTAwIiBmaWxsPSIjZjBmMGYwIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iODAiIGZpbGw9IiNkZGQiLz4KPHRLEHN0eWxlPSJmb250LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTZweDsgZmlsbDogIzY2NjsiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjEwMCIgeT0iMTA1Ij5Qcm9maWxlIFBob3RvPC90ZXh0Pgo8L3N2Zz4K" alt="Allegra Bourne" class="profile-img">
+                <h1>Allegra Bourne</h1>
+                <p>Senior Software Engineer & Data Scientist</p>
+                <p>Passionate about AI, IoT, and sustainable technology solutions</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.credly.com/users/allegra-bourne/badges#credly" target="_blank" title="Credly">
+                        <i class="fas fa-certificate"></i>
+                    </a>
+                    <a href="https://www.coursera.org/learner/allegra-bourne" target="_blank" title="Coursera">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://github.com/AlleWeston-hash" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I'm an experienced software engineer with over a decade of expertise in developing concurrent, extensible, and scalable solutions for businesses across diverse industries including finance, supply chain technology, AI platforms, transportation systems, and IoT.</p>
+                        
+                        <p>Currently working as a Senior Software Engineer at Ligentia, I specialize in modern development frameworks, cloud services, and enterprise messaging solutions, with a strong emphasis on test-driven development (TDD) and design patterns.</p>
+                        
+                        <p>My passion extends beyond traditional software engineering to innovative applications of AI and machine learning in wildlife conservation and data science. I believe in the power of technology to solve real-world problems and drive positive change.</p>
+                        
+                        <p>I'm an advocate of mentoring and teamwork, committed to continuous learning and professional growth.</p>
+                    </div>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Languages & Frameworks</h3>
+                            <ul>
+                                <li>C# / .NET Core</li>
+                                <li>Python / PyTorch</li>
+                                <li>JavaScript / TypeScript</li>
+                                <li>Angular / Blazor</li>
+                                <li>Java / Node.js</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Cloud & DevOps</h3>
+                            <ul>
+                                <li>Microsoft Azure</li>
+                                <li>Azure DevOps</li>
+                                <li>Docker / Kubernetes</li>
+                                <li>CI/CD Pipelines</li>
+                                <li>Octopus Deploy</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Data & AI</h3>
+                            <ul>
+                                <li>Machine Learning</li>
+                                <li>Deep Learning</li>
+                                <li>Data Analysis</li>
+                                <li>IoT Development</li>
+                                <li>Bioacoustic Analysis</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Databases & Tools</h3>
+                            <ul>
+                                <li>SQL Server / T-SQL</li>
+                                <li>Apache Kafka</li>
+                                <li>RabbitMQ</li>
+                                <li>Entity Framework</li>
+                                <li>Git / TFS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section" style="background: #f8f9fa;">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Hedgehog Bioacoustic Analysis IoT AI</h3>
+                            <p>Wildlife Conservation AI System</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                An innovative AI-based personal wildlife monitoring project that uses Raspberry Pi and deep learning to detect signs of respiratory illness in hedgehogs through bioacoustic analysis. The system processes audio recordings to identify potential lungworm infections, combining IoT technology with machine learning for wildlife conservation.
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">Raspberry Pi</span>
+                                <span class="tech-tag">IoT</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">Audio Processing</span>
+                                <span class="tech-tag">Computer Vision</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://www.linkedin.com/pulse/hedgehog-bioacoustic-analysis-iot-ai-allegra-bourne-nee-weston--fovmc/?trackingId=1%2Fxt4zJEGWNwvM5m314Azw%3D%3D" target="_blank">Read Article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>SpaceX Launch Data Analysis</h3>
+                            <p>IBM Data Science Capstone Project</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                A comprehensive data science project analyzing SpaceX launch data to predict mission outcomes and assess payload impact. Built interactive dashboards and machine learning models to determine launch success rates and provide insights for competitive analysis in the space industry.
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Plotly Dash</span>
+                                <span class="tech-tag">Folium</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">Machine Learning</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/AlleWeston-hash/DataScienceCapstone" target="_blank">View Code</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Consignment Delivery Management Portal</h3>
+                            <p>Enterprise Supply Chain Solution</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                Developed a comprehensive delivery management portal for Ligentia, featuring API development with Fast Endpoints, messaging via Azure ServiceBus, and Angular UI. The solution provides end-to-end supply chain visibility for major retail clients.
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">C# / .NET</span>
+                                <span class="tech-tag">Angular</span>
+                                <span class="tech-tag">Azure ServiceBus</span>
+                                <span class="tech-tag">Fast Endpoints</span>
+                                <span class="tech-tag">Azure DevOps</span>
+                                <span class="tech-tag">SQL Server</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>ICMP Traffic Management Platform</h3>
+                            <p>Smart City Infrastructure</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                Contributed to the development of ICMP, the traffic management platform for New South Wales, Australia. Part of TfNSW's $123 million intelligent congestion management program, enabling better traffic management through real-time data and predictive technology.
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Angular</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">SignalR</span>
+                                <span class="tech-tag">Azure Service Fabric</span>
+                                <span class="tech-tag">NServiceBus</span>
+                                <span class="tech-tag">RabbitMQ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <h2>Professional Experience</h2>
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Senior Software Engineer</div>
+                                <div class="experience-company">Ligentia, Leeds, UK</div>
+                            </div>
+                            <div class="experience-date">Jun 2022 - Present</div>
+                        </div>
+                        <div class="experience-description">
+                            Leading development of new Consignment Delivery Management portal and Landed Cost portal, helping retain major clients like Myer (Australia's largest department store). Specialized in API development, Azure services, and modern web technologies with emphasis on CI/CD and deployment automation.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Full Stack Developer</div>
+                                <div class="experience-company">Refract (Allego), Newcastle upon Tyne, UK</div>
+                            </div>
+                            <div class="experience-date">Apr 2021 - Jun 2022</div>
+                        </div>
+                        <div class="experience-description">
+                            Enhanced AI-powered sales insight platform with multilingual capabilities and new analytics features. Developed using .NET, Angular, and SQL with emphasis on TDD and cloud-native architecture on Microsoft Azure.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Integrations Developer</div>
+                                <div class="experience-company">XCM, York, UK</div>
+                            </div>
+                            <div class="experience-date">Apr 2020 - Apr 2021</div>
+                        </div>
+                        <div class="experience-description">
+                            Specialized in client integration using .NET Core and Kafka for real-time distributed streaming of big data. Developed data warehousing solutions and worked extensively with Google Cloud Platform and Apache technologies.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Software Engineer</div>
+                                <div class="experience-company">Cubic Corporation, Stockton-On-Tees, UK</div>
+                            </div>
+                            <div class="experience-date">Jan 2019 - Apr 2020</div>
+                        </div>
+                        <div class="experience-description">
+                            Contributed to the development of ICMP traffic management platform for New South Wales, Australia. Worked with cutting-edge technologies including Angular, TypeScript, Azure Service Fabric, and enterprise messaging systems.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section" style="background: #f8f9fa;">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #666;">
+                        I'm always interested in new opportunities and collaborations. Whether you'd like to discuss a project, share ideas about AI and conservation, or just say hello, I'd love to hear from you.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <a href="mailto:alleweston@gmail.com" style="display: inline-block; padding: 12px 24px; background: #667eea; color: white; text-decoration: none; border-radius: 25px; transition: all 0.3s ease;">
+                            <i class="fas fa-envelope"></i> Email Me
+                        </a>
+                        <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="display: inline-block; padding: 12px 24px; background: #0077b5; color: white; text-decoration: none; border-radius: 25px; transition: all 0.3s ease;">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Allegra Bourne. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and project cards
+        document.querySelectorAll('.section, .project-card, .experience-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
