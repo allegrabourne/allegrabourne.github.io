@@ -41,22 +41,39 @@
             --primary-hover: #5a6fd8;
         }
 
-        /* Default to dark theme */
-        :root {
-            --bg-color: var(--dark-bg);
-            --text-color: var(--dark-text);
-            --text-secondary: var(--dark-text-secondary);
-            --card-bg: var(--dark-card-bg);
-            --section-bg: var(--dark-section-bg);
-            --border-color: var(--dark-border);
-            --shadow-color: var(--dark-shadow);
-            --shadow-hover: var(--dark-shadow-hover);
-            --skill-bg: var(--dark-skill-bg);
-            --skill-text: var(--dark-skill-text);
-            --tech-bg: var(--dark-tech-bg);
-            --tech-text: var(--dark-tech-text);
-        }
+      /* Default to light theme */
+:root {
+    --bg-color: var(--light-bg);
+    --text-color: var(--light-text);
+    --text-secondary: var(--light-text-secondary);
+    --card-bg: var(--light-card-bg);
+    --section-bg: var(--light-section-bg);
+    --border-color: var(--light-border);
+    --shadow-color: var(--light-shadow);
+    --shadow-hover: var(--light-shadow-hover);
+    --skill-bg: var(--light-skill-bg);
+    --skill-text: var(--light-skill-text);
+    --tech-bg: var(--light-tech-bg);
+    --tech-text: var(--light-tech-text);
+}
 
+/* Auto dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: var(--dark-bg);
+        --text-color: var(--dark-text);
+        --text-secondary: var(--dark-text-secondary);
+        --card-bg: var(--dark-card-bg);
+        --section-bg: var(--dark-section-bg);
+        --border-color: var(--dark-border);
+        --shadow-color: var(--dark-shadow);
+        --shadow-hover: var(--dark-shadow-hover);
+        --skill-bg: var(--dark-skill-bg);
+        --skill-text: var(--dark-skill-text);
+        --tech-bg: var(--dark-tech-bg);
+        --tech-text: var(--dark-tech-text);
+    }
+}
         /* Light theme */
         [data-theme="light"] {
             --bg-color: var(--light-bg);
@@ -648,7 +665,7 @@
         }
     </style>
 </head>
-<body data-theme="dark">
+<body>
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <i class="fas fa-sun" id="themeIcon"></i>
@@ -1083,41 +1100,56 @@
             observer.observe(el);
         });
 
-        // Theme Toggle Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = document.getElementById('themeIcon');
-            const body = document.body;
-            
-            // Get saved theme from localStorage or default to 'dark'
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            
-            // Apply the saved theme
-            body.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
-            
-            // Toggle theme function
-            function toggleTheme() {
-                const currentTheme = body.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                body.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcon(newTheme);
-            }
-            
-            // Update theme icon
-            function updateThemeIcon(theme) {
-                if (theme === 'dark') {
-                    themeIcon.className = 'fas fa-sun';
-                } else {
-                    themeIcon.className = 'fas fa-moon';
-                }
-            }
-            
-            // Add click event listener
-            themeToggle.addEventListener('click', toggleTheme);
-        });
+                 // Theme Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+    
+    // Function to get system theme preference
+    function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    // Get saved theme from localStorage or default to system preference
+    const savedTheme = localStorage.getItem('theme') || getSystemTheme();
+    
+    // Apply the saved theme
+    body.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    // Listen for system theme changes (when user changes OS theme)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+            // Only update if user hasn't manually set a preference
+            const newTheme = e.matches ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+    });
+    
+    // Toggle theme function
+    function toggleTheme() {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    }
+    
+    // Update theme icon
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeIcon.className = 'fas fa-sun';
+        } else {
+            themeIcon.className = 'fas fa-moon';
+        }
+    }
+    
+    // Add click event listener
+    themeToggle.addEventListener('click', toggleTheme);
+});
     </script>
 </body>
 </html>
