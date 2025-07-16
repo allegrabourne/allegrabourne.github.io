@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Case of the Perfect Match - Detective Allegra</title>
+    <title>Resume for Murder: The Case of the Perfect Match</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -15,7 +15,7 @@
             --clue-white: #f8f9fa;
             --board-bg: #8b4513;
             --room-bg: #f4f4f4;
-            --hallway-bg: #ffd700;
+            --card-bg: #ffffff;
         }
 
         * {
@@ -25,132 +25,257 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #e0e0e0;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
 
         .title {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: var(--clue-mustard);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 1rem;
             color: #b0b0b0;
         }
 
-        .clue-board {
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
-            gap: 2px;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            background: var(--board-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .room {
-            background: var(--room-bg);
-            color: #333;
-            padding: 15px 5px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .room:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .room.clicked {
-            background: var(--clue-green);
-            color: white;
-        }
-
-        .hallway {
-            background: var(--hallway-bg);
-            color: #333;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 40px;
-        }
-
-        .suspects-section, .weapons-section, .solution-section {
-            margin: 2rem 0;
-            padding: 2rem;
+        .game-section {
             background: rgba(255,255,255,0.1);
             border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .suspects-grid, .weapons-grid {
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--clue-mustard);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .card.selected {
+            border-color: var(--clue-green);
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+            box-shadow: 0 0 20px rgba(45, 80, 22, 0.4);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--clue-red);
+        }
+
+        .card-role {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-detail {
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        .rooms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
 
-        .suspect-card, .weapon-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1.5rem;
+        .room-card {
+            background: var(--room-bg);
+            color: #333;
+            padding: 1.2rem;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 3px solid transparent;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .room-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .room-card.selected {
+            border-color: var(--clue-blue);
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            box-shadow: 0 0 20px rgba(30, 58, 138, 0.4);
+        }
+
+        .room-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: var(--clue-blue);
+        }
+
+        .room-detail {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .weapons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .weapon-card {
+            background: var(--card-bg);
+            color: #333;
+            padding: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .weapon-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .weapon-card.selected {
+            border-color: var(--clue-purple);
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            box-shadow: 0 0 20px rgba(88, 28, 135, 0.4);
+        }
+
+        .weapon-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: var(--clue-purple);
+        }
+
+        .weapon-detail {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .accusation-section {
+            background: rgba(139, 0, 0, 0.2);
+            border: 2px solid var(--clue-red);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .accusation-btn {
+            background: var(--clue-red);
             color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-family: inherit;
         }
 
-        .suspect-card:hover, .weapon-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        .accusation-btn:hover {
+            background: #a00000;
+            transform: translateY(-2px);
         }
 
-        .suspect-card.selected, .weapon-card.selected {
-            background: linear-gradient(135deg, #2d5016 0%, #5a8a3a 100%);
-            box-shadow: 0 0 20px rgba(45, 80, 22, 0.5);
+        .accusation-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-box {
+            background: rgba(45, 80, 22, 0.3);
+            border: 2px solid var(--clue-green);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .result-box.revealed {
+            display: block;
+            animation: slideIn 0.5s ease-in;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .cipher-section {
-            margin: 2rem 0;
-            padding: 2rem;
             background: rgba(139, 0, 0, 0.2);
-            border-radius: 15px;
             border: 2px solid var(--clue-red);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
         }
 
         .cipher-text {
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
+            font-size: 1rem;
             background: rgba(0,0,0,0.5);
             padding: 1rem;
             border-radius: 8px;
             margin: 1rem 0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             word-break: break-all;
+            color: #ffd700;
         }
 
         .decode-input {
@@ -163,374 +288,390 @@
             background: rgba(0,0,0,0.7);
             color: white;
             margin: 1rem 0;
+            font-family: inherit;
         }
 
         .decode-input::placeholder {
             color: #888;
         }
 
-        .btn {
+        .unlock-success {
+            background: rgba(45, 80, 22, 0.3);
+            border: 2px solid var(--clue-green);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            color: #90ee90;
+            display: none;
+        }
+
+        .unlock-success.shown {
+            display: block;
+            animation: slideIn 0.5s ease-in;
+        }
+
+        .new-game-btn {
             background: var(--clue-mustard);
             color: #333;
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
+            margin-top: 1rem;
         }
 
-        .btn:hover {
+        .new-game-btn:hover {
             background: #b8941f;
             transform: translateY(-2px);
         }
 
-        .solution-box {
-            background: rgba(45, 80, 22, 0.3);
-            border: 2px solid var(--clue-green);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-            display: none;
-        }
-
-        .solution-box.revealed {
-            display: block;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hint {
-            font-size: 0.9rem;
-            color: #888;
-            margin-top: 1rem;
-            font-style: italic;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 5px;
-            overflow: hidden;
+        .hint-box {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--clue-mustard);
+            padding: 1rem;
+            border-radius: 8px;
             margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--clue-green);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .easter-egg {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--clue-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        .easter-egg:hover {
-            opacity: 1;
-            transform: scale(1.1);
+            font-size: 0.9rem;
+            color: #ffd700;
         }
 
         @media (max-width: 768px) {
-            .clue-board {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 1px;
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
             
-            .room {
-                padding: 10px 2px;
-                font-size: 0.7rem;
-                min-height: 60px;
+            .rooms-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .title {
-                font-size: 1.8rem;
+            .weapons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .game-section {
+                padding: 1rem;
+            }
+            
+            .cipher-text {
+                font-size: 0.9rem;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rooms-grid,
+            .weapons-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="title">🔍 The Case of the Perfect Match</h1>
-        <p class="subtitle">Detective Allegra's Career Path Mystery</p>
+        <h1 class="title">🔍 Resume for Murder: The Case of the Perfect Match</h1>
+        <p class="subtitle">Allegra's Career Path Mystery</p>
         
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <div class="clue-board">
-            <div class="room" data-room="study">Study<br><small>BSc Computing</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="library">Library<br><small>Continuous Learning</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="conservatory">Conservatory<br><small>Wildlife AI</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="billiard">Billiard Room<br><small>Team Leadership</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="lounge">Lounge<br><small>Collaboration</small></div>
-            
-            <div class="hallway">↓</div>
-            <div class="hallway"></div>
-            <div class="hallway">↓</div>
-            <div class="hallway"></div>
-            <div class="hallway">↓</div>
-            <div class="hallway"></div>
-            <div class="hallway">↓</div>
-            <div class="hallway"></div>
-            <div class="hallway">↓</div>
-            
-            <div class="room" data-room="kitchen">Kitchen<br><small>Cooking Code</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="ballroom">Ballroom<br><small>Azure Cloud</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="hall">Hall<br><small>AI/ML</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="dining">Dining Room<br><small>Data Science</small></div>
-            <div class="hallway">→</div>
-            <div class="room" data-room="office">Office<br><small>Senior Dev</small></div>
-        </div>
-
-        <div class="suspects-section">
-            <h2>🎭 The Suspects (Tech Roles)</h2>
-            <div class="suspects-grid">
-                <div class="suspect-card" data-suspect="scarlett">
-                    <h3>Miss Scarlett</h3>
-                    <p>The Frontend Developer</p>
-                    <small>Master of Angular & UI/UX</small>
-                </div>
-                <div class="suspect-card" data-suspect="mustard">
-                    <h3>Colonel Mustard</h3>
-                    <p>The Backend Engineer</p>
-                    <small>C# & .NET Core Expert</small>
-                </div>
-                <div class="suspect-card" data-suspect="white">
-                    <h3>Mrs. White</h3>
-                    <p>The Data Scientist</p>
-                    <small>Python & ML Specialist</small>
-                </div>
-                <div class="suspect-card" data-suspect="green">
-                    <h3>Mr. Green</h3>
-                    <p>The DevOps Engineer</p>
-                    <small>Azure & CI/CD Master</small>
-                </div>
-                <div class="suspect-card" data-suspect="peacock">
-                    <h3>Mrs. Peacock</h3>
-                    <p>The AI Engineer</p>
-                    <small>Deep Learning & IoT</small>
-                </div>
-                <div class="suspect-card" data-suspect="plum">
-                    <h3>Professor Plum</h3>
-                    <p>The Solutions Architect</p>
-                    <small>Full Stack & Integration</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="weapons-section">
-            <h2>🔧 The Weapons (Technologies)</h2>
-            <div class="weapons-grid">
-                <div class="weapon-card" data-weapon="candlestick">
-                    <h3>Candlestick</h3>
-                    <p>PyTorch & TensorFlow</p>
-                </div>
-                <div class="weapon-card" data-weapon="knife">
-                    <h3>Knife</h3>
-                    <p>Azure ServiceBus</p>
-                </div>
-                <div class="weapon-card" data-weapon="pipe">
-                    <h3>Lead Pipe</h3>
-                    <p>Apache Kafka</p>
-                </div>
-                <div class="weapon-card" data-weapon="rope">
-                    <h3>Rope</h3>
-                    <p>Docker & Kubernetes</p>
-                </div>
-                <div class="weapon-card" data-weapon="wrench">
-                    <h3>Wrench</h3>
-                    <p>SQL & Entity Framework</p>
-                </div>
-                <div class="weapon-card" data-weapon="revolver">
-                    <h3>Revolver</h3>
-                    <p>Machine Learning & AI</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="cipher-section">
-            <h2>🔐 The Encrypted Message</h2>
-            <p>Decode this message to reveal the final clue:</p>
+        <div class="cipher-section" id="cipherSection">
+            <h2 class="section-title">🔐 Unlock the Case</h2>
+            <p>Decode this encrypted message to begin your investigation:</p>
             <div class="cipher-text" id="cipherText">
                 VGhlIHBlcmZlY3QgbWF0Y2ggaXMgc29tZW9uZSB3aG8gYXBwcmVjaWF0ZXMgYm90aCBpbm5vdmF0aW9uIGFuZCBkZWRpY2F0aW9uLCBjb21iaW5pbmcgdGVjaG5pY2FsIGV4cGVydGlzZSB3aXRoIGEgcGFzc2lvbiBmb3Igc29sdmluZyByZWFsLXdvcmxkIHByb2JsZW1zLiBJZiB5b3UndmUgbWFkZSBpdCB0aGlzIGZhciwgeW91J3JlIGFscmVhZHkgZGVtb25zdHJhdGluZyB0aGUgY3VyaW9zaXR5IGFuZCBwcm9ibGVtLXNvbHZpbmcgc2tpbGxzIHRoYXQgbWFrZSBhIGdyZWF0IGNvbGxlYWd1ZSBhbmQgcG90ZW50aWFsIGNvbGxhYm9yYXRvci4=
             </div>
             <input type="text" class="decode-input" id="decodeInput" placeholder="Enter the decoded message here...">
-            <br>
-            <button class="btn" onclick="checkCipher()">Decode Message</button>
+            <br><br>
+            <button class="accusation-btn" onclick="checkCipher()">Decode Message</button>
+          <!--  <div class="hint-box" style="margin-top: 1rem; text-align: left;">
+                💡 <strong>Hint:</strong> This looks like Base64 encoding. Try using <code>atob()</code> in the browser console, or any online Base64 decoder!
+            </div> -->
         </div>
 
-        <div class="solution-section">
-            <h2>🎯 Make Your Accusation</h2>
-            <p>Who committed the crime of being the perfect match?</p>
-            <button class="btn" onclick="makeSolution()">Solve the Case</button>
-            
-            <div class="solution-box" id="solutionBox">
-                <h3>🎉 Case Solved!</h3>
-                <p><strong>The Answer:</strong> YOU are the perfect match!</p>
-                <p>By finding this hidden page, decoding the cipher, and solving the puzzle, you've demonstrated exactly the kind of curiosity, technical skills, and problem-solving abilities that make for an excellent collaborator.</p>
-                <p>The real treasure was the skills you showed along the way:</p>
-                <ul style="text-align: left; margin: 1rem 0;">
-                    <li>🕵️ Detective skills (finding hidden content)</li>
-                    <li>💻 Technical knowledge (Base64 decoding)</li>
-                    <li>🧩 Problem-solving mindset</li>
-                    <li>🎯 Persistence and attention to detail</li>
-                </ul>
-                <p><strong>If you've made it this far, let's connect! You clearly have the geeky curiosity and technical skills that would make us a great match for collaboration.</strong></p>
-                <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: #0077b5; color: white; text-decoration: none; border-radius: 8px;">
-                    Connect on LinkedIn
-                </a>
+        <div class="game-content" id="gameContent" style="display: none;">
+            <div class="hint-box">
+                💡 <strong>How to Play:</strong> Select one suspect, one room, and one weapon, then make your accusation! 
+                Check the browser console for hints about the correct solution.
+            </div>
+
+            <div class="game-section">
+                <h2 class="section-title">🎭 The Suspects</h2>
+                <div class="cards-grid" id="suspectsGrid"></div>
+            </div>
+
+            <div class="game-section">
+                <h2 class="section-title">🏠 The Rooms</h2>
+                <div class="rooms-grid" id="roomsGrid"></div>
+            </div>
+
+            <div class="game-section">
+                <h2 class="section-title">🔧 The Weapons</h2>
+                <div class="weapons-grid" id="weaponsGrid"></div>
+            </div>
+
+            <div class="accusation-section">
+                <h2 class="section-title">⚖️ Make Your Accusation</h2>
+                <p>I accuse <span id="selectedSuspect">______</span> of the crime in the <span id="selectedRoom">______</span> with the <span id="selectedWeapon">______</span>!</p>
+                <br>
+                <button class="accusation-btn" id="accusationBtn" onclick="makeAccusation()" disabled>
+                    Make Accusation
+                </button>
+                
+                <div class="result-box" id="resultBox"></div>
             </div>
         </div>
     </div>
 
-    <div class="easter-egg" onclick="easterEgg()">
-        <i class="fas fa-question"></i>
-    </div>
-
     <script>
-        let clickedRooms = new Set();
+        const suspects = [
+            { id: 'scarlett', name: 'Miss Scarlett', role: 'Frontend Developer', detail: 'Master of Angular & UI/UX' },
+            { id: 'mustard', name: 'Colonel Mustard', role: 'Backend Engineer', detail: 'C# & .NET Core Expert' },
+            { id: 'white', name: 'Mrs. White', role: 'Data Scientist', detail: 'Python & ML Specialist' },
+            { id: 'green', name: 'Mr. Green', role: 'DevOps Engineer', detail: 'Azure & CI/CD Master' },
+            { id: 'peacock', name: 'Mrs. Peacock', role: 'AI Engineer', detail: 'Deep Learning & IoT' },
+            { id: 'plum', name: 'Professor Plum', role: 'Solutions Architect', detail: 'Full Stack & Integration' }
+        ];
+
+        const rooms = [
+            { id: 'study', name: 'Study', detail: 'BSc Computing' },
+            { id: 'library', name: 'Library', detail: 'Continuous Learning' },
+            { id: 'conservatory', name: 'Conservatory', detail: 'Wildlife AI' },
+            { id: 'billiard', name: 'Billiard Room', detail: 'Team Leadership' },
+            { id: 'lounge', name: 'Lounge', detail: 'Collaboration' },
+            { id: 'kitchen', name: 'Kitchen', detail: 'Cooking Code' },
+            { id: 'ballroom', name: 'Ballroom', detail: 'Azure Cloud' },
+            { id: 'hall', name: 'Hall', detail: 'AI/ML' },
+            { id: 'dining', name: 'Dining Room', detail: 'Data Science' }
+        ];
+
+        const weapons = [
+            { id: 'candlestick', name: 'Candlestick', detail: 'PyTorch & TensorFlow' },
+            { id: 'knife', name: 'Knife', detail: 'Azure ServiceBus' },
+            { id: 'pipe', name: 'Lead Pipe', detail: 'Apache Kafka' },
+            { id: 'rope', name: 'Rope', detail: 'Docker & Kubernetes' },
+            { id: 'wrench', name: 'Wrench', detail: 'SQL & Entity Framework' },
+            { id: 'revolver', name: 'Revolver', detail: 'Machine Learning & AI' }
+        ];
+
+        let solution = {};
         let selectedSuspect = null;
+        let selectedRoom = null;
         let selectedWeapon = null;
-        let cipherDecoded = false;
-
-        // Room clicking logic
-        document.querySelectorAll('.room').forEach(room => {
-            room.addEventListener('click', function() {
-                if (!this.classList.contains('clicked')) {
-                    this.classList.add('clicked');
-                    clickedRooms.add(this.dataset.room);
-                    updateProgress();
-                }
-            });
-        });
-
-        // Suspect selection
-        document.querySelectorAll('.suspect-card').forEach(card => {
-            card.addEventListener('click', function() {
-                document.querySelectorAll('.suspect-card').forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
-                selectedSuspect = this.dataset.suspect;
-                updateProgress();
-            });
-        });
-
-        // Weapon selection
-        document.querySelectorAll('.weapon-card').forEach(card => {
-            card.addEventListener('click', function() {
-                document.querySelectorAll('.weapon-card').forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
-                selectedWeapon = this.dataset.weapon;
-                updateProgress();
-            });
-        });
-
-        function updateProgress() {
-            const totalSteps = 5; // 3 rooms minimum + suspect + weapon + cipher
-            let completedSteps = 0;
-            
-            if (clickedRooms.size >= 3) completedSteps++;
-            if (selectedSuspect) completedSteps++;
-            if (selectedWeapon) completedSteps++;
-            if (cipherDecoded) completedSteps++;
-            
-            const progress = (completedSteps / totalSteps) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
+        let gameUnlocked = false;
 
         function checkCipher() {
             const input = document.getElementById('decodeInput').value.trim();
             const expectedStart = "The perfect match is someone who appreciates both innovation and dedication";
             
             if (input.toLowerCase().includes(expectedStart.toLowerCase())) {
-                alert('🎉 Cipher decoded successfully! You\'ve cracked the code!');
-                cipherDecoded = true;
-                updateProgress();
+                const successDiv = document.createElement('div');
+                successDiv.className = 'unlock-success shown';
+                successDiv.innerHTML = `
+                    <h3>🎉 Cipher Decoded Successfully!</h3>
+                    <p>Excellent work! You've demonstrated the analytical skills needed to solve this case. I like the cut of your jib!</p>
+                    <p>The investigation can now begin...</p>
+                `;
+                document.getElementById('cipherSection').appendChild(successDiv);
+                
+                setTimeout(() => {
+                    document.getElementById('cipherSection').style.display = 'none';
+                    document.getElementById('gameContent').style.display = 'block';
+                    gameUnlocked = true;
+                    initGame();
+                }, 2000);
+                
                 document.getElementById('decodeInput').style.border = '2px solid var(--clue-green)';
+                document.getElementById('decodeInput').disabled = true;
             } else {
-                alert('🔍 Not quite right. Try decoding the Base64 message!');
+                alert('🔍 Not quite right. The message appears to be Base64 encoded. Try using a Base64 decoder!');
+                document.getElementById('decodeInput').style.border = '2px solid var(--clue-red)';
+                setTimeout(() => {
+                    document.getElementById('decodeInput').style.border = '2px solid var(--clue-mustard)';
+                }, 2000);
             }
         }
 
-        function makeSolution() {
-            if (clickedRooms.size < 3) {
-                alert('🔍 You need to explore more rooms first!');
-                return;
+        function initGame() {
+            if (!gameUnlocked) return;
+            
+            // Generate random solution
+            solution = {
+                suspect: suspects[Math.floor(Math.random() * suspects.length)],
+                room: rooms[Math.floor(Math.random() * rooms.length)],
+                weapon: weapons[Math.floor(Math.random() * weapons.length)]
+            };
+
+            console.log('🕵️ Detective Console Hints:');
+            console.log(`🎭 The suspect is someone who works with: ${solution.suspect.detail}`);
+            console.log(`🏠 The room represents: ${solution.room.detail}`);
+            console.log(`🔧 The weapon involves: ${solution.weapon.detail}`);
+            console.log('');
+            console.log('💡 Full solution (for testing):');
+            console.log(`   Suspect: ${solution.suspect.name}`);
+            console.log(`   Room: ${solution.room.name}`);
+            console.log(`   Weapon: ${solution.weapon.name}`);
+
+            selectedSuspect = null;
+            selectedRoom = null;
+            selectedWeapon = null;
+
+            renderSuspects();
+            renderRooms();
+            renderWeapons();
+            updateAccusationText();
+            updateAccusationButton();
+
+            document.getElementById('resultBox').classList.remove('revealed');
+        }
+
+        function renderSuspects() {
+            const grid = document.getElementById('suspectsGrid');
+            grid.innerHTML = '';
+            
+            suspects.forEach(suspect => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-title">${suspect.name}</div>
+                    <div class="card-role">${suspect.role}</div>
+                    <div class="card-detail">${suspect.detail}</div>
+                `;
+                card.addEventListener('click', () => selectSuspect(suspect));
+                grid.appendChild(card);
+            });
+        }
+
+        function renderRooms() {
+            const grid = document.getElementById('roomsGrid');
+            grid.innerHTML = '';
+            
+            rooms.forEach(room => {
+                const card = document.createElement('div');
+                card.className = 'room-card';
+                card.innerHTML = `
+                    <div class="room-name">${room.name}</div>
+                    <div class="room-detail">${room.detail}</div>
+                `;
+                card.addEventListener('click', () => selectRoom(room));
+                grid.appendChild(card);
+            });
+        }
+
+        function renderWeapons() {
+            const grid = document.getElementById('weaponsGrid');
+            grid.innerHTML = '';
+            
+            weapons.forEach(weapon => {
+                const card = document.createElement('div');
+                card.className = 'weapon-card';
+                card.innerHTML = `
+                    <div class="weapon-name">${weapon.name}</div>
+                    <div class="weapon-detail">${weapon.detail}</div>
+                `;
+                card.addEventListener('click', () => selectWeapon(weapon));
+                grid.appendChild(card);
+            });
+        }
+
+        function selectSuspect(suspect) {
+            selectedSuspect = suspect;
+            document.querySelectorAll('.card').forEach(card => card.classList.remove('selected'));
+            event.target.closest('.card').classList.add('selected');
+            updateAccusationText();
+            updateAccusationButton();
+        }
+
+        function selectRoom(room) {
+            selectedRoom = room;
+            document.querySelectorAll('.room-card').forEach(card => card.classList.remove('selected'));
+            event.target.closest('.room-card').classList.add('selected');
+            updateAccusationText();
+            updateAccusationButton();
+        }
+
+        function selectWeapon(weapon) {
+            selectedWeapon = weapon;
+            document.querySelectorAll('.weapon-card').forEach(card => card.classList.remove('selected'));
+            event.target.closest('.weapon-card').classList.add('selected');
+            updateAccusationText();
+            updateAccusationButton();
+        }
+
+        function updateAccusationText() {
+            document.getElementById('selectedSuspect').textContent = selectedSuspect ? selectedSuspect.name : '______';
+            document.getElementById('selectedRoom').textContent = selectedRoom ? selectedRoom.name : '______';
+            document.getElementById('selectedWeapon').textContent = selectedWeapon ? selectedWeapon.name : '______';
+        }
+
+        function updateAccusationButton() {
+            const btn = document.getElementById('accusationBtn');
+            btn.disabled = !(selectedSuspect && selectedRoom && selectedWeapon);
+        }
+
+        function makeAccusation() {
+            const isCorrect = selectedSuspect.id === solution.suspect.id && 
+                            selectedRoom.id === solution.room.id && 
+                            selectedWeapon.id === solution.weapon.id;
+
+            const resultBox = document.getElementById('resultBox');
+            
+            if (isCorrect) {
+                resultBox.innerHTML = `
+                    <h3>🎉 Congratulations! Case Solved!</h3>
+                    <p><strong>You got it right!</strong></p>
+                    <p><strong>${solution.suspect.name}</strong> committed the crime in the <strong>${solution.room.name}</strong> with the <strong>${solution.weapon.name}</strong>!</p>
+                    <p>By solving this puzzle, you've demonstrated exactly the kind of analytical thinking and attention to detail that makes for excellent colleague.</p>
+                    <p><strong>The real treasure was the problem-solving skills you showed along the way...</strong></p>
+                    <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: #0077b5; color: white; text-decoration: none; border-radius: 8px;">
+                        Connect on LinkedIn
+                    </a>
+                    <button class="new-game-btn" onclick="initGame()">New Game</button>
+                `;
+                createConfetti();
+            } else {
+                resultBox.innerHTML = `
+                    <h3>🕵️ Not Quite Right...</h3>
+                    <p>Your accusation was incorrect. The real solution was:</p>
+                    <p><strong>${solution.suspect.name}</strong> in the <strong>${solution.room.name}</strong> with the <strong>${solution.weapon.name}</strong></p>
+                    <p>Check the console for hints and try again!</p>
+                    <button class="new-game-btn" onclick="initGame()">New Game</button>
+                `;
             }
             
-            if (!selectedSuspect || !selectedWeapon) {
-                alert('🎭 You need to select a suspect and weapon!');
-                return;
-            }
-            
-            if (!cipherDecoded) {
-                alert('🔐 You need to decode the cipher first!');
-                return;
-            }
-            
-            document.getElementById('solutionBox').classList.add('revealed');
-            
-            // Confetti effect
-            setTimeout(() => {
-                for (let i = 0; i < 50; i++) {
-                    createConfetti();
-                }
-            }, 500);
+            resultBox.classList.add('revealed');
         }
 
         function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.style.position = 'fixed';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = '0';
-            confetti.style.width = '10px';
-            confetti.style.height = '10px';
-            confetti.style.backgroundColor = ['#667eea', '#764ba2', '#d4af37', '#2d5016'][Math.floor(Math.random() * 4)];
-            confetti.style.pointerEvents = 'none';
-            confetti.style.zIndex = '9999';
-            document.body.appendChild(confetti);
-            
-            confetti.animate([
-                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                { transform: 'translateY(100vh) rotate(360deg)', opacity: 0 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                easing: 'linear'
-            }).onfinish = () => confetti.remove();
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = ['#667eea', '#764ba2', '#d4af37', '#2d5016'][Math.floor(Math.random() * 4)];
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.borderRadius = '50%';
+                    document.body.appendChild(confetti);
+                    
+                    confetti.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                        { transform: 'translateY(100vh) rotate(360deg)', opacity: 0 }
+                    ], {
+                        duration: Math.random() * 3000 + 2000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    }).onfinish = () => confetti.remove();
+                }, i * 50);
+            }
         }
-
-        function easterEgg() {
-            alert('🎪 Easter Egg! You found the secret button! This shows you pay attention to details - another great quality in a collaborator!');
-        }
-
-        setTimeout(() => {
-            console.log('🔍 Psst! For fellow developers: The cipher is Base64 encoded. Try atob() in the console or any Base64 decoder!');
-        }, 5000);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔐 Welcome to Resume for Murder! Dun dun duuuuuun...');
+            console.log('💡 Hint: Try decoding the message to unlock the game...');
+            console.log('🛠️ You can use atob() in this console or other means to decode.');
+        });
     </script>
 </body>
 </html>
