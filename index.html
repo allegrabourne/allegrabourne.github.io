@@ -6,6 +6,73 @@
     <title>Allegra Bourne - Fullstack Software Engineer, Citizen Scientist and AI/Event Driven Solutions Specialist</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            /* Light theme colors */
+            --light-bg: #ffffff;
+            --light-text: #333333;
+            --light-text-secondary: #666666;
+            --light-card-bg: #ffffff;
+            --light-section-bg: #f8f9fa;
+            --light-border: #e9ecef;
+            --light-shadow: rgba(0, 0, 0, 0.1);
+            --light-shadow-hover: rgba(0, 0, 0, 0.15);
+            --light-skill-bg: #f8f9fa;
+            --light-skill-text: #666666;
+            --light-tech-bg: #e9ecef;
+            --light-tech-text: #495057;
+            
+            /* Dark theme colors */
+            --dark-bg: #1a1a1a;
+            --dark-text: #e0e0e0;
+            --dark-text-secondary: #a0a0a0;
+            --dark-card-bg: #2d2d2d;
+            --dark-section-bg: #242424;
+            --dark-border: #404040;
+            --dark-shadow: rgba(0, 0, 0, 0.3);
+            --dark-shadow-hover: rgba(0, 0, 0, 0.5);
+            --dark-skill-bg: #333333;
+            --dark-skill-text: #b0b0b0;
+            --dark-tech-bg: #404040;
+            --dark-tech-text: #d0d0d0;
+            
+            /* Gradient colors (remain the same) */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --primary-hover: #5a6fd8;
+        }
+
+        /* Default to dark theme */
+        :root {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--dark-text);
+            --text-secondary: var(--dark-text-secondary);
+            --card-bg: var(--dark-card-bg);
+            --section-bg: var(--dark-section-bg);
+            --border-color: var(--dark-border);
+            --shadow-color: var(--dark-shadow);
+            --shadow-hover: var(--dark-shadow-hover);
+            --skill-bg: var(--dark-skill-bg);
+            --skill-text: var(--dark-skill-text);
+            --tech-bg: var(--dark-tech-bg);
+            --tech-text: var(--dark-tech-text);
+        }
+
+        /* Light theme */
+        [data-theme="light"] {
+            --bg-color: var(--light-bg);
+            --text-color: var(--light-text);
+            --text-secondary: var(--light-text-secondary);
+            --card-bg: var(--light-card-bg);
+            --section-bg: var(--light-section-bg);
+            --border-color: var(--light-border);
+            --shadow-color: var(--light-shadow);
+            --shadow-hover: var(--light-shadow-hover);
+            --skill-bg: var(--light-skill-bg);
+            --skill-text: var(--light-skill-text);
+            --tech-bg: var(--light-tech-bg);
+            --tech-text: var(--light-tech-text);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,9 +82,10 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            background: var(--primary-gradient);
             min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
         .container {
@@ -26,16 +94,47 @@
             padding: 0 20px;
         }
 
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px var(--shadow-hover);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px var(--shadow-color);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
         }
 
         nav {
@@ -48,7 +147,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #667eea;
+            color: var(--primary-color);
         }
 
         .nav-links {
@@ -59,13 +158,13 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-color);
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: var(--primary-color);
         }
 
         /* Hero Section */
@@ -126,22 +225,27 @@
 
         /* Main Content */
         main {
-            background: white;
+            background: var(--bg-color);
             margin-top: -50px;
             border-radius: 20px 20px 0 0;
             position: relative;
             z-index: 1;
+            transition: background 0.3s ease;
         }
 
         .section {
             padding: 80px 0;
         }
 
+        .section:nth-child(even) {
+            background: var(--section-bg);
+        }
+
         .section h2 {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: var(--text-color);
             position: relative;
         }
 
@@ -153,7 +257,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: var(--primary-gradient);
         }
 
         /* About Section */
@@ -167,6 +271,7 @@
         .about-text {
             font-size: 1.1rem;
             line-height: 1.8;
+            color: var(--text-secondary);
         }
 
         .skills-grid {
@@ -176,15 +281,16 @@
         }
 
         .skill-category {
-            background: #f8f9fa;
+            background: var(--skill-bg);
             padding: 1.5rem;
             border-radius: 10px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--primary-color);
+            transition: background 0.3s ease;
         }
 
         .skill-category h3 {
             margin-bottom: 1rem;
-            color: #667eea;
+            color: var(--primary-color);
         }
 
         .skill-category ul {
@@ -193,7 +299,7 @@
 
         .skill-category li {
             padding: 0.3rem 0;
-            color: #666;
+            color: var(--skill-text);
         }
 
         /* Certifications Section */
@@ -206,12 +312,12 @@
         }
 
         .certification-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px var(--shadow-color);
             transition: all 0.3s ease;
-            border: 1px solid #e9ecef;
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
@@ -223,18 +329,18 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
         }
 
         .certification-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px var(--shadow-hover);
         }
 
         .certification-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -247,18 +353,18 @@
         .certification-title {
             font-size: 1.3rem;
             font-weight: bold;
-            color: #333;
+            color: var(--text-color);
             margin-bottom: 0.5rem;
         }
 
         .certification-issuer {
-            color: #667eea;
+            color: var(--primary-color);
             font-weight: 500;
             margin-bottom: 1rem;
         }
 
         .certification-description {
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
@@ -271,17 +377,18 @@
         }
 
         .skill-badge {
-            background: #e9ecef;
+            background: var(--tech-bg);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            color: #495057;
+            color: var(--tech-text);
+            transition: background 0.3s ease;
         }
 
         .certification-link {
             display: inline-block;
             padding: 0.5rem 1rem;
-            background: #667eea;
+            background: var(--primary-color);
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -289,7 +396,7 @@
         }
 
         .certification-link:hover {
-            background: #5a6fd8;
+            background: var(--primary-hover);
         }
 
         /* Projects Section */
@@ -300,22 +407,22 @@
         }
 
         .project-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px var(--shadow-color);
             transition: all 0.3s ease;
-            border: 1px solid #e9ecef;
+            border: 1px solid var(--border-color);
         }
 
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px var(--shadow-hover);
         }
 
         .project-header {
             padding: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             color: white;
         }
 
@@ -330,7 +437,7 @@
 
         .project-description {
             margin-bottom: 1.5rem;
-            color: #666;
+            color: var(--text-secondary);
         }
 
         .tech-stack {
@@ -341,11 +448,12 @@
         }
 
         .tech-tag {
-            background: #e9ecef;
+            background: var(--tech-bg);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            color: #495057;
+            color: var(--tech-text);
+            transition: background 0.3s ease;
         }
 
         .project-links {
@@ -355,7 +463,7 @@
 
         .project-links a {
             padding: 0.5rem 1rem;
-            background: #667eea;
+            background: var(--primary-color);
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -363,7 +471,7 @@
         }
 
         .project-links a:hover {
-            background: #5a6fd8;
+            background: var(--primary-hover);
         }
 
         /* Experience Section */
@@ -379,17 +487,19 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
+            background: var(--primary-gradient);
         }
 
         .experience-item {
             position: relative;
             margin-bottom: 2rem;
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px var(--shadow-color);
             margin-left: 1rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .experience-item::before {
@@ -399,9 +509,9 @@
             top: 1.5rem;
             width: 12px;
             height: 12px;
-            background: #667eea;
+            background: var(--primary-color);
             border-radius: 50%;
-            border: 3px solid white;
+            border: 3px solid var(--card-bg);
         }
 
         .experience-header {
@@ -414,30 +524,67 @@
         .experience-title {
             font-size: 1.2rem;
             font-weight: bold;
-            color: #333;
+            color: var(--text-color);
         }
 
         .experience-company {
-            color: #667eea;
+            color: var(--primary-color);
             font-weight: 500;
         }
 
         .experience-date {
-            color: #666;
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
         .experience-description {
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #0077b5;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            background: #005885;
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: white;
+            background: var(--card-bg);
+            color: var(--text-color);
             text-align: center;
             padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         /* Responsive Design */
@@ -470,6 +617,13 @@
             .section {
                 padding: 60px 0;
             }
+
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+                top: 15px;
+                right: 15px;
+            }
         }
 
         /* Animations */
@@ -487,9 +641,18 @@
         .fade-in {
             animation: fadeInUp 0.6s ease-out;
         }
+
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
     </style>
 </head>
-<body>
+<body data-theme="dark">
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-sun" id="themeIcon"></i>
+    </button>
     <header>
         <nav class="container">
             <div class="logo">Allegra Bourne</div>
@@ -587,7 +750,7 @@
             </div>
         </section>
 
-        <section id="projects" class="section" style="background: #f8f9fa;">
+        <section id="projects" class="section">
             <div class="container">
                 <h2>Featured Projects</h2>
                 <div class="projects-grid">
@@ -756,7 +919,7 @@
             </div>
         </section>
 
-          <section id="certifications" class="section" style="background: #f8f9fa;">
+          <section id="certifications" class="section">
             <div class="container">
                 <h2>Qualifications and Certifications</h2>
                 <div class="certifications-grid">
@@ -806,7 +969,7 @@
 
                     <div class="certification-card">
                         <div class="certification-icon">
-                            <i class="fas fa-laptop-code"></i>
+                            <i class="fas fa-robot"></i>
                         </div>
                         <div class="certification-title">BSc Business Computing 2:1 (hons)</div>
                         <div class="certification-issuer">Teesside University (2008)</div>
@@ -815,30 +978,24 @@
                         </div>
                         <div class="certification-skills">
                             <span class="skill-badge">Java</span>
-                            <span class="skill-badge">Python</span>
                             <span class="skill-badge">VB.Net</span>
                             <span class="skill-badge">C#</span>
                             <span class="skill-badge">SQL</span>
                             <span class="skill-badge">Database Systems</span>
-                            <span class="skill-badge">Advanced Web Scripting and APIs</span>
+                            <span class="skill-badge">Advanced Web Scripting and Apis</span>
                             <span class="skill-badge">Statistical Data Analysis</span>
                             <span class="skill-badge">Data Warehousing</span>
-                            <span class="skill-badge">Linear Regression</span>
-                            <span class="skill-badge">Correlation Analysis</span>
-                            <span class="skill-badge">CSS</span>
-                            <span class="skill-badge">xHtml</span>
-                            <span class="skill-badge">JavaScript</span>            
                         </div>
                     </div>
 
                      <div class="certification-card">
                         <div class="certification-icon">
-                            <i class="fas fa-briefcase"></i>
+                            <i class="fas fa-robot"></i>
                         </div>
                         <div class="certification-title">Internship</div>
                         <div class="certification-issuer">State Street - Luxembourg (2007)</div>
                         <div class="certification-description">
-                           One year internship with State Street Corporation. Worked on the development of a data warehousing solution which pooled various assets, funds and investment information from different locations throughout the world. This information would then be used for investment analysis, fund accounting and various other investment strategies.
+                           One year internship with State Street Corporation. Worked on the development of a data warehousing solution which pooled various assets, funds and investment information from different locations throughout the world. This information would then be used for investment analysis, fund accounting and various other investment strategies. Unfortunately the 2008 financial crisis meant that there was little opportunity to stay on after graduation.
                         </div>
                         <div class="certification-skills">
                             <span class="skill-badge">Java</span>
@@ -852,7 +1009,7 @@
         </section>
 
 
-        <section id="contact" class="section" style="background: #f8f9fa;">
+        <section id="contact" class="section">
             <div class="container">
                 <h2>Get In Touch</h2>
                 <div style="text-align: center; max-width: 600px; margin: 0 auto;">
@@ -919,6 +1076,42 @@
         // Observe all sections and project cards
         document.querySelectorAll('.section, .project-card, .experience-item').forEach(el => {
             observer.observe(el);
+        });
+
+        // Theme Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            
+            // Get saved theme from localStorage or default to 'dark'
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            
+            // Apply the saved theme
+            body.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            // Toggle theme function
+            function toggleTheme() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            }
+            
+            // Update theme icon
+            function updateThemeIcon(theme) {
+                if (theme === 'dark') {
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+            
+            // Add click event listener
+            themeToggle.addEventListener('click', toggleTheme);
         });
     </script>
 </body>
