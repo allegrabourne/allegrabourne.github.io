@@ -196,6 +196,102 @@
             color: #666;
         }
 
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .certification-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .certification-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .certification-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-issuer {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .certification-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .certification-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-badge {
+            background: #e9ecef;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        .certification-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .certification-link:hover {
+            background: #5a6fd8;
+        }
+
         /* Projects Section */
         .projects-grid {
             display: grid;
@@ -355,6 +451,10 @@
             }
 
             .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .certifications-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -655,6 +755,99 @@
                 </div>
             </div>
         </section>
+
+          <section id="certifications" class="section" style="background: #f8f9fa;">
+            <div class="container">
+                <h2>Qualifications and Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="certification-title">IBM Data Science Professional Certificate</div>
+                        <div class="certification-issuer">IBM (2025)</div>
+                        <div class="certification-description">
+                            Comprehensive data science program covering data analysis, machine learning, and data visualization. Gained hands-on experience with Python, SQL, and various data science tools and methodologies.
+                        </div>
+                        <div class="certification-skills">
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">Machine Learning</span>
+                            <span class="skill-badge">Data Analysis</span>
+                            <span class="skill-badge">SQL</span>
+                            <span class="skill-badge">Data Visualization</span>
+                            <span class="skill-badge">Statistics</span>
+                        </div>
+                        <a href="https://coursera.org/share/8bb16e2be758ad8fa926d95cb07e5388" target="_blank" class="certification-link">
+                            View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="certification-title">IBM AI Developer Professional Certificate</div>
+                        <div class="certification-issuer">IBM (2024)</div>
+                        <div class="certification-description">
+                            Advanced AI development program focused on building and deploying AI applications. Covers natural language processing, computer vision, and AI application development using modern frameworks.
+                        </div>
+                        <div class="certification-skills">
+                            <span class="skill-badge">Artificial Intelligence</span>
+                            <span class="skill-badge">Deep Learning</span>
+                            <span class="skill-badge">Natural Language Processing</span>
+                            <span class="skill-badge">Computer Vision</span>
+                            <span class="skill-badge">AI Application Development</span>
+                            <span class="skill-badge">Model Deployment</span>
+                        </div>
+                        <a href="https://coursera.org/share/fefaa216f95bed18f6e0f1b26b50eee4" target="_blank" class="certification-link">
+                            View Certificate
+                        </a>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="certification-title">BSc Business Computing 2:1 (hons)</div>
+                        <div class="certification-issuer">Teesside University (2008)</div>
+                        <div class="certification-description">
+                           A Washington Accord recognised undergraduate qualification with a major in Computer Science and a minor in Business Studies.
+                        </div>
+                        <div class="certification-skills">
+                            <span class="skill-badge">Java</span>
+                            <span class="skill-badge">VB.Net</span>
+                            <span class="skill-badge">C#</span>
+                            <span class="skill-badge">SQL</span>
+                            <span class="skill-badge">Database Systems</span>
+                            <span class="skill-badge">Advanced Web Scripting and APIs</span>
+                            <span class="skill-badge">Statistical Data Analysis</span>
+                            <span class="skill-badge">Data Warehousing</span>
+                            <span class="skill-badge">Linear Regression</span>
+                            <span class="skill-badge">Correlation Analysis</span>
+                            <span class="skill-badge">Web Scripting (CSS, xHtml, JavaScript)</span>                      
+                        </div>
+                    </div>
+
+                     <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="certification-title">Internship</div>
+                        <div class="certification-issuer">State Street - Luxembourg (2007)</div>
+                        <div class="certification-description">
+                           One year internship with State Street Corporation. Worked on the development of a data warehousing solution which pooled various assets, funds and investment information from different locations throughout the world. This information would then be used for investment analysis, fund accounting and various other investment strategies.
+                        </div>
+                        <div class="certification-skills">
+                            <span class="skill-badge">Java</span>
+                            <span class="skill-badge">Oracle (Toad)</span>
+                            <span class="skill-badge">PL/SQL</span>
+                            <span class="skill-badge">Systems Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <section id="contact" class="section" style="background: #f8f9fa;">
             <div class="container">
