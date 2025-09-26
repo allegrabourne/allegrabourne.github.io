@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Editor Pro - Full-Stack Development Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #d1d5db;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 25%, #374151 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .notebook-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(180deg, #111827 0%, #1f2937 50%, #111827 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .cell {
+            border-left: 4px solid #4b5563;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6b7280, #9ca3af, #d1d5db);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .cell.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .cell.visible::before {
+            opacity: 1;
+        }
+
+        .cell:hover {
+            border-left-color: #9ca3af;
+            box-shadow: 0 15px 40px rgba(156, 163, 175, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .cell-markdown {
+            border-left-color: #6b7280;
+        }
+
+        .cell-code {
+            border-left-color: #9ca3af;
+            background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+        }
+
+        .cell-output {
+            border-left-color: #10b981;
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+        }
+
+        .cell-execution {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #374151;
+            color: #9ca3af;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-family: 'Courier New', monospace;
+        }
+
+        h1 {
+            color: #f3f4f6;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        h2 {
+            color: #f9fafb;
+            font-size: 2.2em;
+            margin: 30px 0 20px 0;
+            border-bottom: 3px solid #6b7280;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        h2::before {
+            content: '▶';
+            color: #6b7280;
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+
+        h3 {
+            color: #9ca3af;
+            font-size: 1.6em;
+            margin: 20px 0 10px 0;
+        }
+
+        h4 {
+            color: #d1d5db;
+            font-size: 1.3em;
+            margin: 15px 0 10px 0;
+        }
+
+        .logo {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .logo svg {
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+            color: #fecaca;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(127, 29, 29, 0.2);
+            border: 1px solid #b91c1c;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: #bbf7d0;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(22, 101, 52, 0.2);
+            border: 1px solid #16a34a;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #374151 0%, #4b5563 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .before-after {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #4b5563;
+        }
+
+        .before {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+            color: #fca5a5;
+        }
+
+        .after {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: #a7f3d0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid #6b7280;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .code-block {
+            background: #111827;
+            color: #d1d5db;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #4b5563;
+            position: relative;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: #3b82f6;
+        }
+
+        .code-string {
+            color: #10b981;
+        }
+
+        .code-function {
+            color: #f59e0b;
+        }
+
+        .code-class {
+            color: #8b5cf6;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1em;
+            color: #d1d5db;
+            border-left: 4px solid #3b82f6;
+            padding: 25px;
+            margin: 25px 0;
+            background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+            border-radius: 0 12px 12px 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 4em;
+            color: #3b82f6;
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            opacity: 0.3;
+        }
+
+        .workflow-step {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .workflow-step::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: -12px;
+            top: 15px;
+            background: #3b82f6;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .workflow-container {
+            counter-reset: step-counter;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            z-index: 1000;
+            transform-origin: left;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .cell-markdown::before {
+            content: 'Markdown';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #6b7280;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .cell-code::before {
+            content: 'Code';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #9ca3af;
+            color: #111827;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .cell-output::before {
+            content: 'Output';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #10b981;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+
+            .cell {
+                margin: 30px 0;
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #3b82f6;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <div class="notebook-container">
+        <!-- Header Cell -->
+        <div class="cell cell-markdown">
+            <div class="logo">
+                <svg width="500" height="120" viewBox="0 0 400 80">
+                    <defs>
+                        <linearGradient id="cvGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#3b82f6"/>
+                            <stop offset="30%" style="stop-color:#8b5cf6"/>
+                            <stop offset="60%" style="stop-color:#ec4899"/>
+                            <stop offset="100%" style="stop-color:#f59e0b"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="10" y="50" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="url(#cvGradient)">CV Editor Pro</text>
+                    <text x="10" y="70" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Full-Stack Development Showcase</text>
+                </svg>
+            </div>
+            <h1>CV Editor Pro - Complete Solution</h1>
+            <h3 style="text-align: center; color: #94a3b8; margin-bottom: 30px;">From Word Processor Frustration to Professional CV Management</h3>
+            <p style="text-align: center; font-size: 1.1em; color: #cbd5e1;">A comprehensive full-stack application showcasing modern development practices</p>
+        </div>
+
+        <!-- The Problem -->
+        <div class="cell cell-markdown">
+            <h2>The Initial Problem</h2>
+            <div class="problem-box">
+                <h3>Word Processor Frustrations</h3>
+                <p style="margin-bottom: 15px;">The project began with a simple but universal frustration: <strong>hating traditional word processors for CV creation</strong>.</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Formatting Nightmares:</strong> Fighting with margins, spacing, and layout consistency</li>
+                    <li><strong>Template Limitations:</strong> Rigid templates that don't adapt to content</li>
+                    <li><strong>Version Management:</strong> Multiple CV versions for different roles scattered across files</li>
+                    <li><strong>Professional Styling:</strong> Difficulty creating truly professional-looking documents</li>
+                    <li><strong>Content Management:</strong> No easy way to manage multiple CV variations</li>
+                    <li><strong>Export Hassles:</strong> Converting to PDF while maintaining formatting integrity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- The Vision -->
+        <div class="cell cell-markdown">
+            <h2>The Vision: Modern CV Management</h2>
+            <div class="solution-box">
+                <h3>What We Set Out to Build</h3>
+                <p style="margin-bottom: 15px;">A comprehensive CV management system that addresses every pain point of traditional approaches:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Multiple CV Management:</strong> Easily create and maintain different CV variations for different roles</li>
+                    <li><strong>Professional Templates:</strong> Extensive template system with customizable themes</li>
+                    <li><strong>Intelligent Parsing:</strong> Import existing CVs and automatically extract structured data</li>
+                    <li><strong>Real-time Preview:</strong> See exactly how your CV will look while editing</li>
+                    <li><strong>Modern Architecture:</strong> Clean, maintainable code following best practices</li>
+                    <li><strong>Future-Proof Design:</strong> Extensible system for adding new features and templates</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tech Stack Overview -->
+        <div class="cell cell-markdown">
+            <h2>Technology Stack</h2>
+            <div class="highlight">
+                <h3>Frontend Technologies</h3>
+                <div class="tech-stack">
+                    <div class="tech-item"><strong>React 18</strong><br>Modern UI Framework</div>
+                    <div class="tech-item"><strong>Vite</strong><br>Fast Build Tool</div>
+                    <div class="tech-item"><strong>TailwindCSS</strong><br>Utility-First Styling</div>
+                    <div class="tech-item"><strong>Lucide React</strong><br>Beautiful Icons</div>
+                    <div class="tech-item"><strong>PDF.js</strong><br>PDF Processing</div>
+                    <div class="tech-item"><strong>Custom Hooks</strong><br>Reusable Logic</div>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 20px;">
+                <h3>Backend Technologies</h3>
+                <div class="tech-stack">
+                    <div class="tech-item"><strong>.NET 8</strong><br>Modern C# Runtime</div>
+                    <div class="tech-item"><strong>Entity Framework Core</strong><br>ORM & Database</div>
+                    <div class="tech-item"><strong>Clean Architecture</strong><br>SOLID Principles</div>
+                    <div class="tech-item"><strong>FastEndpoints</strong><br>High-Performance APIs</div>
+                    <div class="tech-item"><strong>xUnit + FluentAssertions</strong><br>Comprehensive Testing</div>
+                    <div class="tech-item"><strong>AutoMapper</strong><br>Object Mapping</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Frontend Architecture -->
+        <div class="cell cell-code">
+            <h2>Frontend Architecture Deep Dive</h2>
+            <div class="code-block">
+<span class="code-comment">// Main CVEditor Component - Orchestrates the entire application</span>
+<span class="code-keyword">const</span> <span class="code-function">CVEditor</span> = () => {
+  <span class="code-comment">// State management with custom hooks</span>
+  <span class="code-keyword">const</span> { cvData, ...cvDataActions } = <span class="code-function">useCVData</span>(testData);
+  <span class="code-keyword">const</span> { theme, toggleTheme, isDark } = <span class="code-function">useTheme</span>();
+  <span class="code-keyword">const</span> { importFromFile, exportToPDF } = <span class="code-function">useFileOperations</span>(
+    cvData, selectedTemplate, sectionOrder, hiddenSections,
+    cvDataActions.setCvData, setSectionOrder, setHiddenSections, setSelectedTemplate
+  );
+
+  <span class="code-comment">// Profile management with localStorage integration</span>
+  <span class="code-keyword">const</span> <span class="code-function">handleQuickSave</span> = () => {
+    <span class="code-keyword">if</span> (!currentProfileId) {
+      setShowProfileManager(<span class="code-keyword">true</span>);
+      <span class="code-keyword">return</span>;
+    }
+
+    profileManager.<span class="code-function">saveProfile</span>(
+      currentProfile.name, cvData, sectionOrder,
+      hiddenSections, selectedTemplate
+    );
+  };
+
+  <span class="code-keyword">return</span> (
+    &lt;<span class="code-class">div</span> className={`${isDark ? 'dark-theme' : 'light-theme'}`}&gt;
+      &lt;<span class="code-class">HeaderControls</span> /&gt;
+      &lt;<span class="code-class">EditPanel</span> /&gt;
+      &lt;<span class="code-class">PreviewPanel</span> /&gt;
+    &lt;/<span class="code-class">div</span>&gt;
+  );
+};
+            </div>
+        </div>
+
+        <!-- Advanced Parsing System -->
+        <div class="cell cell-code">
+            <h2>Intelligent CV Parsing System</h2>
+            <div class="code-block">
+<span class="code-comment">// Enhanced CV Parser - Intelligently extracts structured data from text</span>
+<span class="code-keyword">function</span> <span class="code-function">parseExperienceEnhanced</span>(lines) {
+  <span class="code-keyword">const</span> jobs = [];
+  <span class="code-keyword">let</span> currentJob = <span class="code-keyword">null</span>;
+  <span class="code-keyword">let</span> currentSection = <span class="code-keyword">null</span>;
+
+  lines.<span class="code-function">forEach</span>((line, index) => {
+    <span class="code-keyword">const</span> normalizedLine = <span class="code-function">normalizeWhitespace</span>(line);
+    <span class="code-keyword">if</span> (!normalizedLine) <span class="code-keyword">return</span>;
+
+    <span class="code-comment">// Intelligent pattern recognition for job titles, companies, dates</span>
+    <span class="code-keyword">if</span> (<span class="code-function">isLikelyDate</span>(normalizedLine)) {
+      <span class="code-keyword">if</span> (currentJob && !currentJob.dates) {
+        currentJob.dates = <span class="code-function">safeMatch</span>(normalizedLine, DATE_RANGE) ||
+                          <span class="code-function">safeMatch</span>(normalizedLine, YEAR_RANGE);
+      }
+    }
+
+    <span class="code-keyword">if</span> (<span class="code-function">isLikelyJobTitle</span>(normalizedLine)) {
+      <span class="code-comment">// Save previous job and start new one</span>
+      <span class="code-keyword">if</span> (currentJob) jobs.<span class="code-function">push</span>(currentJob);
+
+      currentJob = {
+        title: normalizedLine,
+        company: <span class="code-string">''</span>,
+        dates: <span class="code-string">''</span>,
+        responsibilities: []
+      };
+    }
+
+    <span class="code-keyword">if</span> (<span class="code-function">isLikelyBulletPoint</span>(normalizedLine)) {
+      <span class="code-keyword">const</span> cleanedBullet = normalizedLine.<span class="code-function">replace</span>(BULLET, <span class="code-string">''</span>).<span class="code-function">trim</span>();
+      currentJob.responsibilities.<span class="code-function">push</span>(cleanedBullet);
+    }
+  });
+
+  <span class="code-keyword">return</span> jobs.<span class="code-function">filter</span>(job => job.title.<span class="code-function">trim</span>() || job.company.<span class="code-function">trim</span>());
+}
+            </div>
+        </div>
+
+        <!-- Theme System -->
+        <div class="cell cell-code">
+            <h2>Advanced Theme System</h2>
+            <div class="code-block">
+<span class="code-comment">// Custom useTheme Hook - Persistent theme management with system preference detection</span>
+<span class="code-keyword">export const</span> <span class="code-function">useTheme</span> = () => {
+  <span class="code-keyword">const</span> [theme, setTheme] = <span class="code-function">useState</span>(() => {
+    <span class="code-keyword">if</span> (<span class="code-keyword">typeof</span> window !== <span class="code-string">'undefined'</span>) {
+      <span class="code-keyword">const</span> stored = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'theme'</span>);
+      <span class="code-keyword">if</span> (stored) <span class="code-keyword">return</span> stored;
+      <span class="code-comment">// Could add system preference detection here</span>
+      <span class="code-keyword">return</span> <span class="code-string">'light'</span>;
+    }
+    <span class="code-keyword">return</span> <span class="code-string">'light'</span>;
+  });
+
+  <span class="code-function">useEffect</span>(() => {
+    <span class="code-comment">// Apply theme to document and persist</span>
+    <span class="code-keyword">if</span> (theme === <span class="code-string">'dark'</span>) {
+      document.documentElement.classList.<span class="code-function">add</span>(<span class="code-string">'dark'</span>);
+    } <span class="code-keyword">else</span> {
+      document.documentElement.classList.<span class="code-function">remove</span>(<span class="code-string">'dark'</span>);
+    }
+    localStorage.<span class="code-function">setItem</span>(<span class="code-string">'theme'</span>, theme);
+  }, [theme]);
+
+  <span class="code-keyword">return</span> { theme, toggleTheme, isDark: theme === <span class="code-string">'dark'</span> };
+};
+            </div>
+        </div>
+
+        <!-- Backend Architecture -->
+        <div class="cell cell-code">
+            <h2>Clean Architecture Backend</h2>
+            <div class="code-block">
+<span class="code-comment">// Clean Architecture Implementation - SOLID Principles in Action</span>
+
+<span class="code-comment">// Domain Entity - Core Business Logic</span>
+<span class="code-keyword">public class</span> <span class="code-class">CvProfile</span>
+{
+    <span class="code-keyword">public</span> <span class="code-class">Guid</span> Id { <span class="code-keyword">get</span>; <span class="code-keyword">private set</span>; }
+    <span class="code-keyword">public string</span> Name { <span class="code-keyword">get</span>; <span class="code-keyword">private set</span>; }
+    <span class="code-keyword">public</span> <span class="code-class">PersonalDetails</span> PersonalDetails { <span class="code-keyword">get</span>; <span class="code-keyword">private set</span>; }
+    <span class="code-keyword">public</span> <span class="code-class">List&lt;WorkExperience&gt;</span> WorkExperiences { <span class="code-keyword">get</span>; } = <span class="code-keyword">new</span>();
+
+    <span class="code-comment">// Business logic encapsulated in entity</span>
+    <span class="code-keyword">public void</span> <span class="code-function">UpdateName</span>(<span class="code-keyword">string</span> name)
+    {
+        <span class="code-keyword">if</span> (<span class="code-keyword">string</span>.<span class="code-function">IsNullOrWhiteSpace</span>(name))
+            <span class="code-keyword">throw new</span> <span class="code-class">ArgumentException</span>(<span class="code-string">"Name cannot be empty"</span>);
+
+        Name = name;
+    }
+}
+
+<span class="code-comment">// Application Service - Orchestrates business operations</span>
+<span class="code-keyword">public class</span> <span class="code-class">CvProfileService</span>
+{
+    <span class="code-keyword">private readonly</span> <span class="code-class">ICvProfileRepository</span> _repository;
+    <span class="code-keyword">private readonly</span> <span class="code-class">IMapper</span> _mapper;
+
+    <span class="code-keyword">public async Task&lt;CvProfileDto?&gt;</span> <span class="code-function">GetByIdAsync</span>(<span class="code-class">Guid</span> id)
+    {
+        <span class="code-keyword">var</span> profile = <span class="code-keyword">await</span> _repository.<span class="code-function">GetByIdAsync</span>(id);
+        <span class="code-keyword">return</span> profile == <span class="code-keyword">null</span> ? <span class="code-keyword">null</span> : _mapper.<span class="code-function">Map</span>&lt;<span class="code-class">CvProfileDto</span>&gt;(profile);
+    }
+}
+            </div>
+        </div>
+
+        <!-- Backend Testing -->
+        <div class="cell cell-code">
+            <h2>Comprehensive Testing Strategy</h2>
+            <div class="code-block">
+<span class="code-comment">// TDD Approach with Comprehensive Unit Tests</span>
+<span class="code-keyword">public class</span> <span class="code-class">CvProfileServiceTests</span>
+{
+    <span class="code-keyword">private readonly</span> <span class="code-class">Mock&lt;ICvProfileRepository&gt;</span> _mockRepository;
+    <span class="code-keyword">private readonly</span> <span class="code-class">Mock&lt;IProfileValidationService&gt;</span> _mockValidationService;
+    <span class="code-keyword">private readonly</span> <span class="code-class">CvProfileService</span> _service;
+
+    [<span class="code-class">Fact</span>]
+    <span class="code-keyword">public async Task</span> <span class="code-function">GetByIdAsync_WithExistingProfile_ShouldReturnProfileDto</span>()
+    {
+        <span class="code-comment">// Arrange</span>
+        <span class="code-keyword">var</span> profileId = <span class="code-class">Guid</span>.<span class="code-function">NewGuid</span>();
+        <span class="code-keyword">var</span> personalDetails = <span class="code-keyword">new</span> <span class="code-class">PersonalDetails</span>(
+            <span class="code-string">"John Doe"</span>, <span class="code-string">"123-456-7890"</span>,
+            <span class="code-string">"123 Main St"</span>, <span class="code-string">"john@example.com"</span>,
+            <span class="code-string">"https://johndoe.com"</span>
+        );
+        <span class="code-keyword">var</span> profile = <span class="code-keyword">new</span> <span class="code-class">CvProfile</span>(<span class="code-string">"Test Profile"</span>, personalDetails);
+
+        _mockRepository.<span class="code-function">Setup</span>(r => r.<span class="code-function">GetByIdAsync</span>(profileId, It.<span class="code-function">IsAny</span>&lt;<span class="code-class">CancellationToken</span>&gt;()))
+                      .<span class="code-function">ReturnsAsync</span>(profile);
+
+        <span class="code-comment">// Act</span>
+        <span class="code-keyword">var</span> result = <span class="code-keyword">await</span> _service.<span class="code-function">GetByIdAsync</span>(profileId);
+
+        <span class="code-comment">// Assert - Using FluentAssertions for readable tests</span>
+        result.<span class="code-function">Should</span>().<span class="code-function">NotBeNull</span>();
+        result!.Name.<span class="code-function">Should</span>().<span class="code-function">Be</span>(<span class="code-string">"Test Profile"</span>);
+        result.PersonalDetails.Name.<span class="code-function">Should</span>().<span class="code-function">Be</span>(<span class="code-string">"John Doe"</span>);
+    }
+}
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="cell cell-markdown">
+            <h2>Advanced Features & Capabilities</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🎨 Extensive Template System</h4>
+                    <p>Multiple professional templates with theme support, from minimalist to creative designs that adapt to your content</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Drag & Drop Management</h4>
+                    <p>Reorder CV sections with intuitive drag-and-drop interface, with real-time preview updates</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📤 Smart Import/Export</h4>
+                    <p>Import existing PDFs with intelligent parsing, export to multiple formats with embedded metadata for re-import</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💾 Profile Management</h4>
+                    <p>Manage multiple CV variations for different roles, with quick switching and version control</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌓 Theme Support</h4>
+                    <p>Dark/light mode with persistent preferences, affecting both editor and preview</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚡ Real-time Preview</h4>
+                    <p>Live preview updates as you type, with theme-accurate rendering and responsive design</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Quality & Architecture -->
+        <div class="cell cell-markdown">
+            <h2>Code Quality & Best Practices</h2>
+
+            <div class="solution-box">
+                <h3>SOLID Principles Implementation</h3>
+                <div class="workflow-container">
+                    <div class="workflow-step">
+                        <h4>Single Responsibility Principle</h4>
+                        <p>Each component and service has a single, well-defined responsibility. Hooks manage specific concerns (theme, drag-drop, CV data)</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Open/Closed Principle</h4>
+                        <p>Extensible template system allows new templates without modifying existing code. Parser rules can be added without changing core logic</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Liskov Substitution Principle</h4>
+                        <p>Template implementations can be substituted without affecting the application. Repository pattern allows database provider changes</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Interface Segregation Principle</h4>
+                        <p>Components receive only the props they need. Domain interfaces are focused and cohesive</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Dependency Inversion Principle</h4>
+                        <p>High-level modules depend on abstractions. Repository pattern abstracts data access, hook system abstracts state management</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Challenges -->
+        <div class="cell cell-markdown">
+            <h2>Technical Challenges & Solutions</h2>
+
+            <div class="comparison-grid">
+                <div class="before-after before">
+                    <h3>Complex Challenges</h3>
+                    <ul style="text-align: left;">
+                        <li>🧠 Intelligent text parsing from various CV formats</li>
+                        <li>🎨 Dynamic template system with theme support</li>
+                        <li>📱 Responsive design with complex layouts</li>
+                        <li>💾 Data persistence and state management</li>
+                        <li>🔄 Real-time preview synchronization</li>
+                        <li>📄 PDF generation with perfect formatting</li>
+                    </ul>
+                </div>
+                <div class="before-after after">
+                    <h3>Elegant Solutions</h3>
+                    <ul style="text-align: left;">
+                        <li>🤖 Regex-based parsing with pattern recognition</li>
+                        <li>🏗️ Modular template architecture with CSS-in-JS</li>
+                        <li>📐 TailwindCSS utility classes with responsive design</li>
+                        <li>🎯 Custom React hooks for state management</li>
+                        <li>⚡ useEffect-based reactive updates</li>
+                        <li>🎯 HTML-to-PDF conversion with embedded styles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Enhancements -->
+        <div class="cell cell-markdown">
+            <h2>Future Roadmap & Enhancements</h2>
+
+            <div class="highlight">
+                <h3>Planned Features</h3>
+                <p>The extensible architecture makes it easy to add new capabilities:</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card" style="background: linear-gradient(135deg, #1e40af, #3b82f6);">
+                    <h4>🔐 User Authentication</h4>
+                    <p>Multi-user support with secure login, profile sharing, and collaborative editing</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
+                    <h4>☁️ Cloud Storage</h4>
+                    <p>Cloud-based CV storage with synchronization across devices</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
+                    <h4>📊 Analytics Dashboard</h4>
+                    <p>Track CV views, downloads, and application success rates</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #059669, #10b981);">
+                    <h4>🤝 Integration APIs</h4>
+                    <p>Connect with job boards, LinkedIn, and applicant tracking systems</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #ea580c, #f97316);">
+                    <h4>🎯 AI Recommendations</h4>
+                    <p>AI-powered suggestions for improving CV content and formatting</p>
+                </div>
+                <div class="feature-card" style="background: linear-gradient(135deg, #0891b2, #06b6d4);">
+                    <h4>📱 Mobile App</h4>
+                    <p>Native mobile applications for iOS and Android</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Development Journey -->
+        <div class="cell cell-markdown">
+            <h2>Development Journey & Lessons Learned</h2>
+
+            <div class="quote">
+                "This project transformed from a simple frustration with word processors into a comprehensive full-stack application showcasing modern development practices, clean architecture, and user-centered design."
+            </div>
+
+            <div class="workflow-container">
+                <div class="workflow-step">
+                    <h4>Problem Identification</h4>
+                    <p>Started with genuine frustration about CV formatting in traditional word processors</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>Solution Architecture</h4>
+                    <p>Designed a comprehensive system addressing all pain points with modern web technologies</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>Frontend Development</h4>
+                    <p>Built responsive, accessible interface with advanced features like drag-drop and real-time preview</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>Backend Implementation</h4>
+                    <p>Implemented clean architecture with comprehensive testing following TDD principles</p>
+                </div>
+                <div class="workflow-step">
+                    <h4>Feature Expansion</h4>
+                    <p>Added advanced capabilities like intelligent parsing, theme system, and profile management</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="cell cell-markdown">
+            <h2>Key Technical Insights</h2>
+
+            <div class="solution-box">
+                <h3>What This Project Demonstrates</h3>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Full-Stack Competency:</strong> Complete application from database to user interface</li>
+                    <li><strong>Modern React Patterns:</strong> Custom hooks, composition, and performance optimization</li>
+                    <li><strong>Clean Architecture:</strong> SOLID principles, dependency injection, and testable code</li>
+                    <li><strong>User Experience Focus:</strong> Intuitive interface solving real user problems</li>
+                    <li><strong>Scalable Design:</strong> Architecture that supports future enhancements</li>
+                    <li><strong>Quality Practices:</strong> Comprehensive testing, code organization, and documentation</li>
+                </ul>
+
+                <div class="highlight" style="margin-top: 20px; border-left-color: #a855f7;">
+                    <p><em>"CV Editor Pro represents the evolution from a simple tool to a comprehensive platform, showcasing how initial frustrations can drive innovative solutions and demonstrate technical excellence across the full development stack."</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="cell cell-markdown">
+            <h2>🎯 Project Impact & Future</h2>
+
+            <div class="solution-box">
+                <h3>From Problem to Solution</h3>
+                <p>CV Editor Pro demonstrates how a simple frustration can evolve into a comprehensive technical solution that showcases:</p>
+
+                <div class="comparison-grid" style="margin-top: 20px;">
+                    <div class="before-after before">
+                        <h3>Initial Problem</h3>
+                        <ul style="text-align: left;">
+                            <li>Hating word processors</li>
+                            <li>Formatting difficulties</li>
+                            <li>Template limitations</li>
+                            <li>Version management issues</li>
+                        </ul>
+                    </div>
+                    <div class="before-after after">
+                        <h3>Comprehensive Solution</h3>
+                        <ul style="text-align: left;">
+                            <li>Professional CV management platform</li>
+                            <li>Clean architecture implementation</li>
+                            <li>Modern development practices</li>
+                            <li>Scalable, maintainable codebase</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quote" style="margin-top: 30px; background: rgba(255,255,255,0.1); border-left-color: white; color: white;">
+                    "This project embodies the journey from identifying a real problem to creating a comprehensive solution that demonstrates technical excellence, user-centered design, and modern development practices."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling progress indicator
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollIndicator').style.transform = `scaleX(${scrolled / 100})`;
+        });
+
+        // Enhanced Jupyter-style cell animation
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cells for animation
+        document.querySelectorAll('.cell').forEach((cell, index) => {
+            // Add execution number for Jupyter-like appearance
+            const executionNumber = document.createElement('div');
+            executionNumber.className = 'cell-execution';
+            executionNumber.textContent = `[${index + 1}]:`;
+            cell.appendChild(executionNumber);
+
+            observer.observe(cell);
+        });
+
+        // Enhanced hover effects
+        document.addEventListener('mouseover', function(e) {
+            if (e.target.matches('.feature-card')) {
+                e.target.style.transform = 'translateY(-10px) scale(1.02)';
+                e.target.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.3)';
+            }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+            if (e.target.matches('.feature-card')) {
+                e.target.style.transform = 'translateY(0) scale(1)';
+                e.target.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                window.scrollBy(0, window.innerHeight * 0.8);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                window.scrollBy(0, -window.innerHeight * 0.8);
+            }
+        });
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            createParticles();
+
+            // Add entrance animation to body
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 1s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
