@@ -505,64 +505,161 @@
     /* Experience Section */
     .experience-timeline {
         position: relative;
-        padding-left: 2rem;
+        display: grid;
+        grid-template-columns: 90px 2px 1fr;
+        /* Line spans full height via the pseudo-element on the wrapper */
     }
-    
+
+    /* Full-height line sits behind everything */
     .experience-timeline::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: 90px;
         top: 0;
         bottom: 0;
         width: 2px;
         background: var(--primary-gradient);
+        z-index: 0;
     }
-    
-    .experience-item {
+
+    /* Hide the separate line element — line is now on the wrapper */
+    .experience-timeline-line {
+        display: none;
+    }
+
+    .tl-role {
+        display: contents;
+    }
+
+    .tl-dates {
+        grid-column: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding-right: 1rem;
         position: relative;
-        margin-bottom: 2rem;
+        z-index: 1;
+    }
+
+    /* End date at top (leaving date = top of card) */
+    .tl-date-end {
+        font-size: 0.68rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        line-height: 1.2;
+        padding-top: 1.5rem;
+        text-align: right;
+    }
+
+    /* Start date at bottom */
+    .tl-date-start {
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        white-space: nowrap;
+        line-height: 1.2;
+        margin-top: auto;
+        padding-bottom: 1.5rem;
+        text-align: right;
+    }
+
+    /* Tick marks on the line */
+    .tl-dates::before,
+    .tl-dates::after {
+        content: '';
+        position: absolute;
+        right: -0.35rem;
+        width: 8px;
+        height: 2px;
+        background: var(--primary-color);
+        z-index: 2;
+    }
+
+    .tl-dates::before {
+        top: 1.6rem;
+    }
+
+    .tl-dates::after {
+        bottom: 1.6rem;
+    }
+
+    .experience-item {
+        grid-column: 3;
+        position: relative;
+        margin-bottom: 1.5rem;
+        margin-left: 1.25rem;
         background: var(--card-bg);
         padding: 1.5rem;
         border-radius: 10px;
         box-shadow: 0 5px 15px var(--shadow-color);
-        margin-left: 1rem;
         border: 1px solid var(--border-color);
         transition: all 0.3s ease;
+        z-index: 1;
     }
-    
+
     .experience-item::before {
         content: '';
         position: absolute;
-        left: -1.5rem;
-        top: 1.5rem;
-        width: 12px;
-        height: 12px;
+        left: -1.25rem;
+        top: 1.6rem;
+        width: 1.25rem;
+        height: 2px;
         background: var(--primary-color);
-        border-radius: 50%;
-        border: 3px solid var(--card-bg);
+        opacity: 0.4;
     }
-    
+
     .experience-header {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 1rem;
     }
-    
+
     .experience-title {
         font-size: 1.2rem;
         font-weight: bold;
         color: var(--text-color);
     }
-    
+
     .experience-company {
         color: var(--primary-color);
         font-weight: 500;
     }
-    
+
     .experience-date {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
+        display: none;
+    }
+
+    /* Month/year stacking within date labels */
+    .tl-month,
+    .tl-year {
+        display: inline;
+    }
+
+    /* Mobile: stack month above year */
+    @media (max-width: 520px) {
+        .experience-timeline {
+            grid-template-columns: 58px 2px 1fr;
+        }
+
+        .tl-month,
+        .tl-year {
+            display: block;
+            line-height: 1.4;
+        }
+
+        .tl-date-end,
+        .tl-date-start {
+            font-size: 0.6rem;
+        }
+
+        .experience-item {
+            padding: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1rem;
+        }
     }
     
     .experience-description {
@@ -1050,15 +1147,15 @@
             <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="color: #0066cc; text-decoration: none;">LinkedIn</a>
         </h3>
 
-        <div class="experience-timeline">
+        <div class="experience-timeline"><div class="experience-timeline-line"></div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2026</span></span><span class="tl-date-start"><span class="tl-month">Jul</span><span class="tl-year">2022</span></span></div><div class="experience-item">
     <div class="experience-header">
         <div>
             <div class="experience-title">Senior Software Engineer</div>
             <div class="experience-company">Ligentia, now part of Asyad Group, Leeds, UK</div>
         </div>
-        <div class="experience-date">Jul 2022 to Jun 2026</div>
+        
     </div>
 
     <div class="experience-description">
@@ -1102,13 +1199,13 @@
             </div>
         </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2022</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2021</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Full Stack Developer</div>
                         <div class="experience-company">Refract, an Allego company, Newcastle upon Tyne, UK</div>
                     </div>
-                    <div class="experience-date">Apr 2021 to Jun 2022</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1150,13 +1247,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2021</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2020</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Integrations Developer</div>
                         <div class="experience-company">XCM, York, UK</div>
                     </div>
-                    <div class="experience-date">Apr 2020 to Apr 2021</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1205,13 +1302,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2020</span></span><span class="tl-date-start"><span class="tl-month">Jan</span><span class="tl-year">2019</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Software Engineer</div>
                         <div class="experience-company">Cubic Corporation, Stockton-on-Tees, UK</div>
                     </div>
-                    <div class="experience-date">Jan 2019 to Apr 2020</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1255,13 +1352,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Dec</span><span class="tl-year">2018</span></span><span class="tl-date-start"><span class="tl-month">Jun</span><span class="tl-year">2017</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Solution Developer</div>
                         <div class="experience-company">Vianet Group plc, Stockton-on-Tees, UK</div>
                     </div>
-                    <div class="experience-date">Jun 2017 to Dec 2018</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1307,13 +1404,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2017</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2017</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Lead Software Developer</div>
                         <div class="experience-company">ZyroFisher, Darlington, UK</div>
                     </div>
-                    <div class="experience-date">Apr 2017 to Jun 2017</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1349,13 +1446,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2017</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2012</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Software Developer</div>
                         <div class="experience-company">Lowell Group, Leeds, UK</div>
                     </div>
-                    <div class="experience-date">Apr 2012 to Apr 2017</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1396,13 +1493,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2012</span></span><span class="tl-date-start"><span class="tl-month">Feb</span><span class="tl-year">2011</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Collections Development Analyst</div>
                         <div class="experience-company">Lowell, Leeds, UK</div>
                     </div>
-                    <div class="experience-date">Feb 2011 to Apr 2012</div>
+                    
                 </div>
 
                 <div class="experience-description">
@@ -1437,13 +1534,13 @@
                 </div>
             </div>
 
-            <div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Feb</span><span class="tl-year">2011</span></span><span class="tl-date-start"><span class="tl-month">Feb</span><span class="tl-year">2009</span></span></div><div class="experience-item">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Integrated Systems Officer</div>
                         <div class="experience-company">North Yorkshire County Council, Northallerton, UK</div>
                     </div>
-                    <div class="experience-date">Feb 2009 to Feb 2011</div>
+                    
                 </div>
 
                 <div class="experience-description">
