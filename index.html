@@ -599,14 +599,7 @@
     }
 
     .experience-item::before {
-        content: '';
-        position: absolute;
-        left: -1.25rem;
-        top: 1.6rem;
-        width: 1.25rem;
-        height: 2px;
-        background: var(--primary-color);
-        opacity: 0.4;
+        display: none;
     }
 
     .experience-header {
@@ -665,13 +658,44 @@
             isolation: isolate;
         }
 
-        .experience-item::before {
-            width: 0.75rem;
-            left: -0.75rem;
-        }
-
         .experience-title {
             font-size: 1rem;
+        }
+    }
+
+    /* Portrait mobile: drop the timeline chrome entirely, stack cards cleanly */
+    @media (max-width: 480px) {
+        /* Single column — no side dates, no vertical line */
+        .experience-timeline {
+            display: block;
+        }
+
+        /* Hide the vertical line */
+        .experience-timeline::before {
+            display: none;
+        }
+
+        /* Hide date column */
+        .tl-dates {
+            display: none;
+        }
+
+        /* Cards go full width */
+        .experience-item {
+            margin-left: 0;
+            margin-bottom: 1.25rem;
+            padding: 1rem;
+        }
+
+        /* Show a small date range at the top of each card via data attribute */
+        .experience-item[data-dates]::after {
+            content: attr(data-dates);
+            display: block;
+            font-size: 0.72rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.02em;
         }
     }
     
@@ -1162,7 +1186,7 @@
 
         <div class="experience-timeline"><div class="experience-timeline-line"></div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2026</span></span><span class="tl-date-start"><span class="tl-month">Jul</span><span class="tl-year">2022</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2026</span></span><span class="tl-date-start"><span class="tl-month">Jul</span><span class="tl-year">2022</span></span></div><div class="experience-item" data-dates="Jul 2022 – Jun 2026">
     <div class="experience-header">
         <div>
             <div class="experience-title">Senior Software Engineer</div>
@@ -1212,7 +1236,7 @@
             </div>
         </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2022</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2021</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2022</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2021</span></span></div><div class="experience-item" data-dates="Apr 2021 – Jun 2022">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Full Stack Developer</div>
@@ -1260,7 +1284,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2021</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2020</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2021</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2020</span></span></div><div class="experience-item" data-dates="Apr 2020 – Apr 2021">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Integrations Developer</div>
@@ -1315,7 +1339,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2020</span></span><span class="tl-date-start"><span class="tl-month">Jan</span><span class="tl-year">2019</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2020</span></span><span class="tl-date-start"><span class="tl-month">Jan</span><span class="tl-year">2019</span></span></div><div class="experience-item" data-dates="Jan 2019 – Apr 2020">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Software Engineer</div>
@@ -1365,7 +1389,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Dec</span><span class="tl-year">2018</span></span><span class="tl-date-start"><span class="tl-month">Jun</span><span class="tl-year">2017</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Dec</span><span class="tl-year">2018</span></span><span class="tl-date-start"><span class="tl-month">Jun</span><span class="tl-year">2017</span></span></div><div class="experience-item" data-dates="Jun 2017 – Dec 2018">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Solution Developer</div>
@@ -1417,7 +1441,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2017</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2017</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2017</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2017</span></span></div><div class="experience-item" data-dates="Apr 2017 – Jun 2017">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Lead Software Developer</div>
@@ -1459,7 +1483,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2017</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2012</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2017</span></span><span class="tl-date-start"><span class="tl-month">Apr</span><span class="tl-year">2012</span></span></div><div class="experience-item" data-dates="Apr 2012 – Apr 2017">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Software Developer</div>
@@ -1506,7 +1530,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2012</span></span><span class="tl-date-start"><span class="tl-month">Feb</span><span class="tl-year">2011</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Apr</span><span class="tl-year">2012</span></span><span class="tl-date-start"><span class="tl-month">Feb</span><span class="tl-year">2011</span></span></div><div class="experience-item" data-dates="Feb 2011 – Apr 2012">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Collections Development Analyst</div>
@@ -1547,7 +1571,7 @@
                 </div>
             </div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Feb</span><span class="tl-year">2011</span></span><span class="tl-date-start"><span class="tl-month">Feb</span><span class="tl-year">2009</span></span></div><div class="experience-item">
+            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Feb</span><span class="tl-year">2011</span></span><span class="tl-date-start"><span class="tl-month">Feb</span><span class="tl-year">2009</span></span></div><div class="experience-item" data-dates="Feb 2009 – Feb 2011">
                 <div class="experience-header">
                     <div>
                         <div class="experience-title">Integrated Systems Officer</div>
