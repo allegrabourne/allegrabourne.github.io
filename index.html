@@ -576,11 +576,57 @@
     }
 
     .experience-description ul li strong {
-        color: var(--text-color);
+        color: var(--text-secondary);
+        font-weight: 600;
     }
 
     .experience-description p {
         color: var(--text-secondary);
+    }
+
+    /* Collapsible experience details */
+    .details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.6rem;
+        padding: 0.3rem 0.85rem 0.3rem 0.6rem;
+        background: var(--tech-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.82rem;
+        font-family: inherit;
+        color: var(--text-secondary);
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+        user-select: none;
+    }
+    .details-toggle:hover {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+    }
+    .details-toggle .toggle-icon {
+        font-size: 0.75rem;
+        transition: transform 0.25s ease;
+        display: inline-block;
+    }
+    .details-toggle.open .toggle-icon {
+        transform: rotate(90deg);
+    }
+    .details-toggle .toggle-label-show { display: inline; }
+    .details-toggle .toggle-label-hide { display: none; }
+    .details-toggle.open .toggle-label-show { display: none; }
+    .details-toggle.open .toggle-label-hide { display: inline; }
+    .collapsible-list {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.35s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+    .collapsible-list.open {
+        max-height: 1200px;
+        opacity: 1;
     }
     
     /* Contact Section */
@@ -1162,14 +1208,21 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">Ligentia is a leading supply chain technology and services provider specialising in manufacturing, consumer brands, pharmaceuticals and the retail sector.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Led development of the new <strong>Consignment Delivery Management portal</strong> — API-first design with Fast Endpoints, enterprise messaging via Azure ServiceBus, and Angular UI.</li>
                         <li>Key contributor to the <strong>Landed Cost portal</strong>, directly helping retain <strong>Myer</strong> (Australia's largest department store) as a client by providing accurate landed cost calculations and end-to-end supply chain visibility from production confirmation through to in-store delivery across Australia.</li>
                         <li>Delivered the <strong>Ligentix supply chain platform</strong>, enabling customers to optimise supply chain cost and efficiency at scale.</li>
                         <li>Architected and maintained <strong>CI/CD pipelines</strong> using Azure DevOps and Octopus Deploy, including release management and deployment automation aligned with industry best practice.</li>
-                        <li>Prototyped a new <strong>client onboarding web application</strong> using Blazor as a proof-of-concept for modernising the client intake process.</li>
+                        <li>Designed and built a <strong>Blazor multi-stage onboarding wizard</strong> to orchestrate configuration across the Ligentia platform and its integrated services, with validation, workflow state management, and extensibility for future AI-assisted guidance.</li>
                         <li>Performed business analysis of legacy processes where institutional knowledge had been lost, producing recommendations for migration to modern tech stacks.</li>
                     </ul>
+                    </div>
                 </div>
                 <div class="tech-stack" style="margin-top: 1rem;">
                     <span class="tech-tag">Fast Endpoints</span>
@@ -1195,13 +1248,20 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">Refract uses AI to deliver personalised sales insight, surfacing the actions and language patterns of top performers. Allego focuses on video learning, onboarding, and sales enablement for enterprise teams.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Implemented <strong>AI-assisted real-time translation workflows</strong> enabling multilingual support across the platform, extending .NET APIs and Angular components so sales teams could consume insights in their native language.</li>
                         <li>Integrated <strong>machine learning-based conversation intelligence</strong> into .NET APIs and UI workflows, enabling automated call scoring, objection tracking, and performance feedback for sales teams.</li>
                         <li>Developed across the full stack using <strong>.NET, Angular, and SQL</strong> with a code-first approach and Entity Framework migrations.</li>
                         <li>Leveraged <strong>Azure Blob Storage</strong> for scalable media and data handling.</li>
                         <li>Maintained a strong emphasis on <strong>TDD and design patterns</strong> to ensure code quality and long-term maintainability.</li>
                     </ul>
+                    </div>
                 </div>
                 <div class="tech-stack" style="margin-top: 1rem;">
                     <span class="tech-tag">.NET</span>
@@ -1225,7 +1285,13 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">XCM are marketing specialists working with major UK retailers to leverage competitive advantage through specialist data tools, CRM services, and data analysis.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Built <strong>client integration pipelines</strong> using .NET Core and Apache Kafka for real-time distributed streaming of big data from Google Cloud Pub/Sub.</li>
                         <li>Used <strong>Apache AVRO</strong> for binary serialisation of messages, significantly improving processing throughput.</li>
                         <li>Containerised Kafka using <strong>Docker</strong> and managed images with Kubernetes.</li>
@@ -1234,6 +1300,7 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                         <li>Developed and maintained the <strong>XCM Horizon data warehouse</strong>.</li>
                         <li>Built web services using <strong>.NET Core hosted in Kestrel</strong>.</li>
                     </ul>
+                    </div>
                 </div>
                 <div class="tech-stack" style="margin-top: 1rem;">
                     <span class="tech-tag">.NET Core</span>
@@ -1260,7 +1327,13 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">Cubic Transportation Systems develops public transport solutions, traffic management platforms, and fare payment systems for governments and transit authorities worldwide.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Contributed to the <strong>Integrated Congestion Management Platform (ICMP)</strong> for New South Wales, Australia — a cornerstone of Transport for NSW's <strong>$123 million</strong> intelligent congestion management programme enabling real-time traffic management and predictive analytics across the state.</li>
                         <li>Built responsive frontend interfaces using <strong>Angular, TypeScript, and SignalR</strong> for real-time bidirectional communication with traffic operators.</li>
                         <li>Developed microservices using <strong>Azure Service Fabric, Topshelf, and Web API</strong> for scalable distributed processing.</li>
@@ -1268,6 +1341,7 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                         <li>Maintained continuous integration via <strong>Jenkins with SonarQube</strong> code quality analysis and Octopus Deploy for release management.</li>
                         <li>Worked within <strong>Agile/SCRUM</strong> teams throughout the engagement.</li>
                     </ul>
+                    </div>
                 </div>
                 <div class="tech-stack" style="margin-top: 1rem;">
                     <span class="tech-tag">C#</span>
@@ -1295,13 +1369,20 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">Vianet are UK leaders in draught beer quality monitoring and waste management services, providing IoT-powered insight to the hospitality sector.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Worked on the <strong>IDraught IoT platform</strong>, consuming real-time device data to power strategic business intelligence for customers — surfacing metrics around wastage, temperature anomalies, missing drinks, and drink quality.</li>
                         <li>Developed the new <strong>Vianet IoT Portal</strong> frontend using AngularJS 2 and TypeScript.</li>
                         <li>Built backend <strong>Web API services</strong> using .NET Core hosted in Kestrel, with Azure web app services and message queuing.</li>
                         <li>Implemented <strong>big data processing via HBase</strong>, with Java, Apache Spark, and Hadoop for number-crunching business logic.</li>
                         <li><strong>Introduced TDD practices</strong> to the team and championed Agile/SCRUM methodologies, as well as actively mentoring junior developers.</li>
                     </ul>
+                    </div>
                 </div>
                 <div class="tech-stack" style="margin-top: 1rem;">
                     <span class="tech-tag">Angular 2</span>
@@ -1322,17 +1403,83 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
             <div class="experience-item">
                 <div class="experience-header">
                     <div>
-                        <div class="experience-title">Software Developer</div>
+                        <div class="experience-title">Lead Software Developer</div>
+                        <div class="experience-company">ZyroFisher &mdash; Darlington, UK</div>
+                    </div>
+                    <div class="experience-date">Apr 2017 &ndash; Jun 2017</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">ZyroFisher are the leading distributor of parts, accessories, and clothing to the UK and Irish cycling markets.</p>
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Delivered the first-ever <strong>e-commerce capability</strong> for the Altura Cycling brand, integrating the customer-facing website with the backend ordering system and payment provider (SagePay) — enabling online purchases for the first time.</li>
+                        <li>Implemented <strong>RabbitMQ-based messaging</strong> and RESTful API services with HMAC authentication to ensure secure, reliable order processing between the storefront and fulfilment systems.</li>
+                        <li>Developed <strong>frontend components using Node.js</strong> as part of the customer-facing web experience.</li>
+                        <li>Placed a strong emphasis on <strong>test-driven development</strong>, utilising NCrunch and MOQ to maintain code quality throughout the engagement.</li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">RabbitMQ</span>
+                    <span class="tech-tag">RESTful APIs</span>
+                    <span class="tech-tag">HMAC Auth</span>
+                    <span class="tech-tag">SagePay</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">TDD</span>
+                    <span class="tech-tag">NCrunch</span>
+                    <span class="tech-tag">MOQ</span>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Software Developer / Collections Development Analyst</div>
                         <div class="experience-company">Lowell Group &mdash; Leeds, UK</div>
                     </div>
                     <div class="experience-date">Feb 2011 &ndash; Apr 2017</div>
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">Lowell are one of Europe's largest credit management companies, operating across the UK, DACH, and Nordic regions.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Progressed from <strong>Collections Development Analyst</strong> (Feb 2011) to <strong>Software Developer</strong> (Apr 2012) over a 6-year tenure.</li>
-                        <li>Developed and maintained software solutions supporting large-scale debt management and collections operations across multiple European markets.</li>
+                        <li>Developed the new <strong>Lowell customer self-service website</strong> (MVC5/Umbraco CMS), allowing customers to manage their accounts and make payments securely via Verifone — the platform achieved over <strong>150,000 customer registrations</strong> in its first year.</li>
+                        <li>Built <strong>RESTful Web API services</strong> self-hosted via Topshelf, with ORM implemented using NHibernate.</li>
+                        <li>Developed <strong>LIMA</strong>, Lowell's main tracing application, supporting collections operations at scale.</li>
+                        <li>Implemented <strong>person matching and address cleansing services</strong> using a Service-Oriented Architecture with WCF and RabbitMQ.</li>
+                        <li>Delivered <strong>automated deployment</strong> using Octopus Deploy with continuous integration via TeamCity.</li>
+                        <li>As Collections Development Analyst: automated a de-duplication process for achieving a single view of customers with multiple accounts, <strong>saving Lowell £40,000</strong> (quoted by the system supplier to scope out a manual solution).</li>
+                        <li>Practised <strong>TDD with NCrunch and MOQ</strong>, applied T-SQL with CLR functions, and worked within Agile/SCRUM teams throughout.</li>
                     </ul>
+                    </div>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">MVC5</span>
+                    <span class="tech-tag">Umbraco CMS</span>
+                    <span class="tech-tag">Web API</span>
+                    <span class="tech-tag">WCF</span>
+                    <span class="tech-tag">RabbitMQ</span>
+                    <span class="tech-tag">NHibernate</span>
+                    <span class="tech-tag">T-SQL</span>
+                    <span class="tech-tag">SSIS</span>
+                    <span class="tech-tag">TDD</span>
+                    <span class="tech-tag">Octopus Deploy</span>
+                    <span class="tech-tag">TeamCity</span>
                 </div>
             </div>
 
@@ -1345,7 +1492,21 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                     <div class="experience-date">Feb 2009 &ndash; Feb 2011</div>
                 </div>
                 <div class="experience-description">
-                    <p>Supported and maintained integrated systems within a large public sector organisation, gaining experience in enterprise systems administration and cross-departmental technology operations.</p>
+                    <p style="margin-bottom:0.75rem;">North Yorkshire County Council is one of the largest local authorities in England, responsible for public services across a wide rural geography.</p>
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Project managed the deployment of CACI's <strong>Children's Centre Management System</strong> to 40 Children's Centres across North Yorkshire.</li>
+                        <li>Project managed the rollout of a new <strong>integrated online Admissions system</strong> for the county.</li>
+                        <li>Supported the deployment and integration of <strong>IMPULSE</strong>, the integrated system for children's services across North Yorkshire.</li>
+                        <li>Led a <strong>data quality drive</strong>, including the development of XML cleansing macros using VBA and XPath to sanitise data received from schools.</li>
+                        <li>Played a lead role in the implementation and accreditation of the national child reference system <strong>ContactPoint</strong>, including Instance Accreditation for North Yorkshire and partner organisations.</li>
+                    </ul>
+                    </div>
                 </div>
             </div>
 
@@ -1359,11 +1520,18 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
                 <div class="experience-description">
                     <p style="margin-bottom:0.75rem;">State Street Corporation is a global financial services company providing investment management and custody services to institutional investors.</p>
-                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                    <button class="details-toggle" onclick="toggleDetails(this)" aria-expanded="false">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                        <span class="toggle-label-show">Show details</span>
+                        <span class="toggle-label-hide">Hide details</span>
+                    </button>
+                    <div class="collapsible-list">
+                    <ul style="margin:0.5rem 0 0.5rem 1.2rem; line-height:1.8;">
                         <li>Contributed to the development of a <strong>data warehousing solution</strong> that consolidated assets, funds, and investment data from multiple international locations into a unified view.</li>
                         <li>Data was used to support <strong>investment analysis, fund accounting</strong>, and a range of investment strategies across global portfolios.</li>
                         <li>Worked with <strong>Java, Oracle (Toad), and PL/SQL</strong> for data extraction, transformation, and integration.</li>
                     </ul>
+                    </div>
                 </div>
                 <div class="tech-stack" style="margin-top: 1rem;">
                     <span class="tech-tag">Java</span>
@@ -1553,7 +1721,15 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
     </div>
 
     <script>
-        const GALLERY_IMAGES = [
+        function toggleDetails(btn) {
+            const list = btn.nextElementSibling;
+            const isOpen = list.classList.toggle('open');
+            btn.classList.toggle('open', isOpen);
+            btn.setAttribute('aria-expanded', isOpen);
+        }
+    </script>
+
+    <script>
     {
         src:  "1000044332.jpg",
         alt:  "Allegra being presented with an award at the BCSWomen Lovelace Colloquium 2025",
