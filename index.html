@@ -594,7 +594,8 @@
         box-shadow: 0 5px 15px var(--shadow-color);
         border: 1px solid var(--border-color);
         transition: all 0.3s ease;
-        z-index: 1;
+        z-index: 2;
+        isolation: isolate;
     }
 
     .experience-item::before {
@@ -637,9 +638,9 @@
     }
 
     /* Mobile: stack month above year */
-    @media (max-width: 520px) {
+    @media (max-width: 600px) {
         .experience-timeline {
-            grid-template-columns: 58px 2px 1fr;
+            grid-template-columns: 52px 2px 1fr;
         }
 
         .tl-month,
@@ -650,11 +651,23 @@
 
         .tl-date-end,
         .tl-date-start {
-            font-size: 0.6rem;
+            font-size: 0.58rem;
+        }
+
+        .tl-dates {
+            padding-right: 0.6rem;
         }
 
         .experience-item {
             padding: 1rem;
+            margin-left: 0.75rem;
+            z-index: 2;
+            isolation: isolate;
+        }
+
+        .experience-item::before {
+            width: 0.75rem;
+            left: -0.75rem;
         }
 
         .experience-title {
