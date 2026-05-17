@@ -569,6 +569,19 @@
         color: var(--text-secondary);
         line-height: 1.6;
     }
+
+    .experience-description ul li {
+        color: var(--text-secondary);
+        padding-left: 0.25rem;
+    }
+
+    .experience-description ul li strong {
+        color: var(--text-color);
+    }
+
+    .experience-description p {
+        color: var(--text-secondary);
+    }
     
     /* Contact Section */
     .contact-content {
@@ -891,8 +904,8 @@
             <div class="logo" id="logoElement">Allegra Bourne</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -983,148 +996,6 @@
             </div>
         </section>
 
-
-     <section id="experience" class="section">
-    <div class="container">
-        <h2>Professional Experience</h2>
-        <h3 style="font-size: 1.1em; margin-top: 0.5em; margin-bottom: 1.5em; color: var(--text-secondary);">For an extensive list, please see my <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="color: #0066cc; text-decoration: none;">LinkedIn</a></h3>
-        <div class="experience-timeline">
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Senior Software Engineer</div>
-                        <div class="experience-company">Ligentia, Leeds, UK</div>
-                    </div>
-                    <div class="experience-date">Jun 2022 - Present</div>
-                </div>
-                <div class="experience-description">
-                    Leading development of enterprise-scale supply chain platforms, including the Consignment Delivery Management portal and Landed Costs portal - a comprehensive financial solution providing end-to-end estimates and actual costs of supply chain operations for major retail clients. The Landed Costs platform features API development with Fast Endpoints, enterprise messaging via Azure ServiceBus, and modern Angular UI, helping retain major clients like Myer (Australia's largest department store). Specialised in API development, Azure services, modern web technologies, SQL Server data architecture, and CI/CD pipelines with emphasis on deployment automation and scalable cloud-native solutions.
-                </div>
-                <div class="tech-stack" style="margin-top: 1rem;">
-                    <span class="tech-tag">Fast Endpoints</span>
-                    <span class="tech-tag">Azure ServiceBus</span>
-                    <span class="tech-tag">Angular</span>
-                    <span class="tech-tag">Blazor</span>
-                    <span class="tech-tag">Azure DevOps</span>
-                    <span class="tech-tag">Octopus Deploy</span>
-                    <span class="tech-tag">CI/CD</span>
-                    <span class="tech-tag">.NET</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">SQL Server</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Full Stack Developer</div>
-                        <div class="experience-company">Refract (Allego), Newcastle upon Tyne, UK</div>
-                    </div>
-                    <div class="experience-date">Apr 2021 - Jun 2022</div>
-                </div>
-                <div class="experience-description">
-                    Enhanced AI-powered sales insight platform with multilingual capabilities and new analytics features. Developed using .NET, Angular, and SQL with emphasis on TDD and cloud-native architecture on Microsoft Azure.
-                </div>
-                <div class="tech-stack" style="margin-top: 1rem;">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">FastAPI</span>
-                    <span class="tech-tag">.NET</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Angular</span>
-                    <span class="tech-tag">SQL</span>
-                    <span class="tech-tag">Entity Framework</span>
-                    <span class="tech-tag">Azure</span>
-                    <span class="tech-tag">TDD</span>
-                    <span class="tech-tag">LLM Integration</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Integrations Developer</div>
-                        <div class="experience-company">XCM, York, UK</div>
-                    </div>
-                    <div class="experience-date">Apr 2020 - Apr 2021</div>
-                </div>
-                <div class="experience-description">
-                    Specialised in client integration using .NET Core and Kafka for real-time distributed streaming of big data. Developed data warehousing solutions and worked extensively with Google Cloud Platform (Pub/Sub) and Apache AVRO for binary serialisation of messages for faster processing. Docker used for Kafka containerisation with Kubernetes for image administration. 
-                </div>
-                <div class="tech-stack" style="margin-top: 1rem;">
-                    <span class="tech-tag">.NET Core</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">Apache Kafka</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">Kubernetes</span>
-                    <span class="tech-tag">T-SQL</span>
-                    <span class="tech-tag">KSQL</span>
-                    <span class="tech-tag">Google Cloud</span>
-                    <span class="tech-tag">Pub/Sub</span>
-                    <span class="tech-tag">Apache AVRO</span>
-                    <span class="tech-tag">Data Warehousing</span>
-                </div>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Software Engineer</div>
-                        <div class="experience-company">Cubic Corporation, Stockton-On-Tees, UK</div>
-                    </div>
-                    <div class="experience-date">Jan 2019 - Apr 2020</div>
-                </div>
-                <div class="experience-description">
-                    Contributed to the development of the Integrated Congestion Management Platform (ICMP) traffic management system for New South Wales, Australia - a cornerstone of Transport for NSW's $123 million intelligent congestion management program. This large-scale smart city infrastructure project enables better traffic management through real-time data streaming, predictive analytics, and distributed systems architecture. Worked extensively with cutting-edge technologies including Angular and TypeScript for responsive front-end interfaces, SignalR for real-time bidirectional communication, Azure Service Fabric for microservices orchestration, and enterprise messaging systems (NServiceBus, RabbitMQ) to handle high-volume traffic data processing. The platform integrates multiple data sources to provide actionable insights for traffic operators, significantly improving congestion management across the NSW transport network.
-                </div>
-                <div class="tech-stack" style="margin-top: 1rem;">
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">TSQL</span>
-                    <span class="tech-tag">.NET</span>
-                    <span class="tech-tag">Angular</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">SignalR</span>
-                    <span class="tech-tag">Azure Service Fabric</span>
-                    <span class="tech-tag">NServiceBus</span>
-                    <span class="tech-tag">RabbitMQ</span>
-                    <span class="tech-tag">Topshelf</span>
-                    <span class="tech-tag">Web API</span>
-                    <span class="tech-tag">Jenkins</span>
-                    <span class="tech-tag">Octopus</span>
-                    <span class="tech-tag">Agile/SCRUM</span>
-                </div>
-            </div>
-            
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Solutions Developer</div>
-                        <div class="experience-company">Vianet Group plc, Stockton-On-Tees, UK</div>
-                    </div>
-                    <div class="experience-date">Jun 2017 - Dec 2018</div>
-                </div>
-                <div class="experience-description">
-                    Worked on the IDraught IoT platform on the consumption of data that would empower customer's strategic decisions on metrics and business intelligence, these insights were then used to measure metrics such as wastage, temperature, in identifying missing drinks and improving drink quality. Big data processing via HBASE. JAVA / Apache SPARK / Hadoop number crunching business logic utilising IntelliJ GUI and taking on a TDD approach for processing of IoT data. 
-                </div>
-                <div class="tech-stack" style="margin-top: 1rem;">
-                    <span class="tech-tag">Angular 2</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">.NET Core</span>
-                    <span class="tech-tag">Web API</span>
-                    <span class="tech-tag">Kestrel</span>
-                    <span class="tech-tag">Azure</span>
-                    <span class="tech-tag">HBase</span>
-                    <span class="tech-tag">Java</span>
-                    <span class="tech-tag">Apache Spark</span>
-                    <span class="tech-tag">Hadoop</span>
-                    <span class="tech-tag">IoT</span>
-                    <span class="tech-tag">TDD</span>
-                    <span class="tech-tag">Agile/SCRUM</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
         <section id="projects" class="section">
             <div class="container">
                 <h2>Featured Personal Projects</h2>
@@ -1274,6 +1145,237 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 </div>
             </div>
         </section>
+
+     <section id="experience" class="section">
+    <div class="container">
+        <h2>Professional Experience</h2>
+        <h3 style="font-size: 1.1em; margin-top: 0.5em; margin-bottom: 1.5em; color: var(--text-secondary);">For a full list, please see my <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="color: #0066cc; text-decoration: none;">LinkedIn</a></h3>
+        <div class="experience-timeline">
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Senior Software Engineer</div>
+                        <div class="experience-company">Ligentia &mdash; Leeds, UK</div>
+                    </div>
+                    <div class="experience-date">Jun 2022 &ndash; Present</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">Ligentia is a leading supply chain technology and services provider specialising in manufacturing, consumer brands, pharmaceuticals and the retail sector.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Led development of the new <strong>Consignment Delivery Management portal</strong> — API-first design with Fast Endpoints, enterprise messaging via Azure ServiceBus, and Angular UI.</li>
+                        <li>Key contributor to the <strong>Landed Cost portal</strong>, directly helping retain <strong>Myer</strong> (Australia's largest department store) as a client by providing accurate landed cost calculations and end-to-end supply chain visibility from production confirmation through to in-store delivery across Australia.</li>
+                        <li>Delivered the <strong>Ligentix supply chain platform</strong>, enabling customers to optimise supply chain cost and efficiency at scale.</li>
+                        <li>Architected and maintained <strong>CI/CD pipelines</strong> using Azure DevOps and Octopus Deploy, including release management and deployment automation aligned with industry best practice.</li>
+                        <li>Prototyped a new <strong>client onboarding web application</strong> using Blazor as a proof-of-concept for modernising the client intake process.</li>
+                        <li>Performed business analysis of legacy processes where institutional knowledge had been lost, producing recommendations for migration to modern tech stacks.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">Fast Endpoints</span>
+                    <span class="tech-tag">Azure ServiceBus</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">Blazor</span>
+                    <span class="tech-tag">Azure DevOps</span>
+                    <span class="tech-tag">Octopus Deploy</span>
+                    <span class="tech-tag">CI/CD</span>
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">SQL Server</span>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Full Stack Developer</div>
+                        <div class="experience-company">Refract (an Allego company) &mdash; Newcastle upon Tyne, UK</div>
+                    </div>
+                    <div class="experience-date">Apr 2021 &ndash; Jun 2022</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">Refract uses AI to deliver personalised sales insight, surfacing the actions and language patterns of top performers. Allego focuses on video learning, onboarding, and sales enablement for enterprise teams.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Implemented <strong>AI-assisted real-time translation workflows</strong> enabling multilingual support across the platform, extending .NET APIs and Angular components so sales teams could consume insights in their native language.</li>
+                        <li>Integrated <strong>machine learning-based conversation intelligence</strong> into .NET APIs and UI workflows, enabling automated call scoring, objection tracking, and performance feedback for sales teams.</li>
+                        <li>Developed across the full stack using <strong>.NET, Angular, and SQL</strong> with a code-first approach and Entity Framework migrations.</li>
+                        <li>Leveraged <strong>Azure Blob Storage</strong> for scalable media and data handling.</li>
+                        <li>Maintained a strong emphasis on <strong>TDD and design patterns</strong> to ensure code quality and long-term maintainability.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">SQL</span>
+                    <span class="tech-tag">Entity Framework</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">TDD</span>
+                    <span class="tech-tag">ML Integration</span>
+                    <span class="tech-tag">C#</span>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Integrations Developer</div>
+                        <div class="experience-company">XCM &mdash; York, UK</div>
+                    </div>
+                    <div class="experience-date">Apr 2020 &ndash; Apr 2021</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">XCM are marketing specialists working with major UK retailers to leverage competitive advantage through specialist data tools, CRM services, and data analysis.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Built <strong>client integration pipelines</strong> using .NET Core and Apache Kafka for real-time distributed streaming of big data from Google Cloud Pub/Sub.</li>
+                        <li>Used <strong>Apache AVRO</strong> for binary serialisation of messages, significantly improving processing throughput.</li>
+                        <li>Containerised Kafka using <strong>Docker</strong> and managed images with Kubernetes.</li>
+                        <li>Developed T-SQL and KSQL for data querying and stream processing.</li>
+                        <li>Delivered data migration, data integration, and a <strong>Single Customer View</strong> solution.</li>
+                        <li>Developed and maintained the <strong>XCM Horizon data warehouse</strong>.</li>
+                        <li>Built web services using <strong>.NET Core hosted in Kestrel</strong>.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">.NET Core</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">Apache Kafka</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">T-SQL</span>
+                    <span class="tech-tag">KSQL</span>
+                    <span class="tech-tag">Google Cloud</span>
+                    <span class="tech-tag">Pub/Sub</span>
+                    <span class="tech-tag">Apache AVRO</span>
+                    <span class="tech-tag">Data Warehousing</span>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Software Engineer</div>
+                        <div class="experience-company">Cubic Corporation &mdash; Stockton-on-Tees, UK</div>
+                    </div>
+                    <div class="experience-date">Jan 2019 &ndash; Apr 2020</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">Cubic Transportation Systems develops public transport solutions, traffic management platforms, and fare payment systems for governments and transit authorities worldwide.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Contributed to the <strong>Integrated Congestion Management Platform (ICMP)</strong> for New South Wales, Australia — a cornerstone of Transport for NSW's <strong>$123 million</strong> intelligent congestion management programme enabling real-time traffic management and predictive analytics across the state.</li>
+                        <li>Built responsive frontend interfaces using <strong>Angular, TypeScript, and SignalR</strong> for real-time bidirectional communication with traffic operators.</li>
+                        <li>Developed microservices using <strong>Azure Service Fabric, Topshelf, and Web API</strong> for scalable distributed processing.</li>
+                        <li>Implemented enterprise messaging with <strong>NServiceBus and RabbitMQ</strong> to handle high-volume traffic data streams.</li>
+                        <li>Maintained continuous integration via <strong>Jenkins with SonarQube</strong> code quality analysis and Octopus Deploy for release management.</li>
+                        <li>Worked within <strong>Agile/SCRUM</strong> teams throughout the engagement.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">SignalR</span>
+                    <span class="tech-tag">Azure Service Fabric</span>
+                    <span class="tech-tag">NServiceBus</span>
+                    <span class="tech-tag">RabbitMQ</span>
+                    <span class="tech-tag">Jenkins</span>
+                    <span class="tech-tag">SonarQube</span>
+                    <span class="tech-tag">Octopus</span>
+                    <span class="tech-tag">Agile/SCRUM</span>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Solutions Developer</div>
+                        <div class="experience-company">Vianet Group plc &mdash; Stockton-on-Tees, UK</div>
+                    </div>
+                    <div class="experience-date">Jun 2017 &ndash; Dec 2018</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">Vianet are UK leaders in draught beer quality monitoring and waste management services, providing IoT-powered insight to the hospitality sector.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Worked on the <strong>IDraught IoT platform</strong>, consuming real-time device data to power strategic business intelligence for customers — surfacing metrics around wastage, temperature anomalies, missing drinks, and drink quality.</li>
+                        <li>Developed the new <strong>Vianet IoT Portal</strong> frontend using AngularJS 2 and TypeScript.</li>
+                        <li>Built backend <strong>Web API services</strong> using .NET Core hosted in Kestrel, with Azure web app services and message queuing.</li>
+                        <li>Implemented <strong>big data processing via HBase</strong>, with Java, Apache Spark, and Hadoop for number-crunching business logic.</li>
+                        <li><strong>Introduced TDD practices</strong> to the team and championed Agile/SCRUM methodologies, as well as actively mentoring junior developers.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">Angular 2</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">.NET Core</span>
+                    <span class="tech-tag">Web API</span>
+                    <span class="tech-tag">Kestrel</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">HBase</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Apache Spark</span>
+                    <span class="tech-tag">Hadoop</span>
+                    <span class="tech-tag">IoT</span>
+                    <span class="tech-tag">TDD</span>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Software Developer</div>
+                        <div class="experience-company">Lowell Group &mdash; Leeds, UK</div>
+                    </div>
+                    <div class="experience-date">Feb 2011 &ndash; Apr 2017</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">Lowell are one of Europe's largest credit management companies, operating across the UK, DACH, and Nordic regions.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Progressed from <strong>Collections Development Analyst</strong> (Feb 2011) to <strong>Software Developer</strong> (Apr 2012) over a 6-year tenure.</li>
+                        <li>Developed and maintained software solutions supporting large-scale debt management and collections operations across multiple European markets.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Integrated Systems Officer</div>
+                        <div class="experience-company">North Yorkshire County Council &mdash; Northallerton, UK</div>
+                    </div>
+                    <div class="experience-date">Feb 2009 &ndash; Feb 2011</div>
+                </div>
+                <div class="experience-description">
+                    <p>Supported and maintained integrated systems within a large public sector organisation, gaining experience in enterprise systems administration and cross-departmental technology operations.</p>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Systems Administrative Assistant (Internship)</div>
+                        <div class="experience-company">State Street Corporation &mdash; Luxembourg</div>
+                    </div>
+                    <div class="experience-date">Sep 2006 &ndash; Sep 2007</div>
+                </div>
+                <div class="experience-description">
+                    <p style="margin-bottom:0.75rem;">State Street Corporation is a global financial services company providing investment management and custody services to institutional investors.</p>
+                    <ul style="margin:0 0 0.5rem 1.2rem; line-height:1.8;">
+                        <li>Contributed to the development of a <strong>data warehousing solution</strong> that consolidated assets, funds, and investment data from multiple international locations into a unified view.</li>
+                        <li>Data was used to support <strong>investment analysis, fund accounting</strong>, and a range of investment strategies across global portfolios.</li>
+                        <li>Worked with <strong>Java, Oracle (Toad), and PL/SQL</strong> for data extraction, transformation, and integration.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack" style="margin-top: 1rem;">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Oracle</span>
+                    <span class="tech-tag">PL/SQL</span>
+                    <span class="tech-tag">Data Warehousing</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
           <section id="certifications" class="section">
             <div class="container">
@@ -1631,26 +1733,3 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
