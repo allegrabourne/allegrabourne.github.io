@@ -919,7 +919,10 @@
     }
 
     .contact-submit {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
         width: 100%;
         padding: 0.9rem 1.25rem;
         background: var(--primary-color);
@@ -2171,9 +2174,10 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                             ></textarea>
                         </div>
 
-                        <button type="submit" class="contact-submit">
-                            Send message
-                        </button>
+                    <button type="submit" class="contact-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Send message
+                    </button>
                     </form>
 
                     <div class="contact-links">
