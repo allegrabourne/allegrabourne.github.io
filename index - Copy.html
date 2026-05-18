@@ -157,8 +157,9 @@
     
     nav {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
+        gap: 1.25rem;
         padding: 1rem 0;
     }
     
@@ -166,6 +167,8 @@
         font-size: 1.5rem;
         font-weight: bold;
         color: var(--primary-color);
+        margin-right: auto;
+        white-space: nowrap;
     }
     
     .nav-links {
@@ -182,6 +185,88 @@
     }
     
     .nav-links a:hover {
+        color: var(--primary-color);
+    }
+
+
+    .mobile-nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        box-shadow: none;
+        transition: color 0.3s ease, opacity 0.2s ease;
+        position: relative;
+        z-index: 1002;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-nav-toggle i {
+        pointer-events: none;
+        font-size: 1.35rem;
+    }
+
+    .mobile-nav-toggle:hover {
+        color: var(--primary-color);
+    }
+
+    .mobile-nav-toggle.menu-open {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .mobile-nav-close {
+        align-self: flex-end;
+        width: 38px;
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        font-size: 1.05rem;
+        margin-bottom: 0.15rem;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-nav-close:hover {
+        background: var(--section-bg);
+        color: var(--primary-color);
+    }
+
+    .mobile-menu a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.8rem 0.9rem;
+        color: var(--text-color);
+        text-decoration: none;
+        background: transparent;
+        border: 0;
+        border-radius: 10px;
+        font: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .mobile-menu a:hover {
+        background: var(--section-bg);
         color: var(--primary-color);
     }
     
@@ -551,6 +636,13 @@
         text-align: right;
     }
 
+    .tl-present {
+        display: block;
+        font-size: 0.62rem;
+        opacity: 0.9;
+        margin-top: 0.15rem;
+    }
+
     /* Start date at bottom */
     .tl-date-start {
         font-size: 0.68rem;
@@ -768,25 +860,109 @@
     /* Contact Section */
     .contact-content {
         text-align: center;
-        max-width: 600px;
+        max-width: 640px;
         margin: 0 auto;
     }
-    
+
     .contact-content p {
         font-size: 1.1rem;
         margin-bottom: 2rem;
         color: var(--text-secondary);
     }
-    
+
+    /* Contact form */
+    .contact-form {
+        max-width: 540px;
+        margin: 0 auto 2rem;
+        text-align: left;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .contact-form label {
+        display: block;
+        margin-bottom: 0.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: var(--card-bg);
+        color: var(--text-color);
+        font: inherit;
+        box-shadow: 0 3px 10px var(--shadow-color);
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+        color: var(--text-secondary);
+        opacity: 0.7;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.18);
+    }
+
+    .contact-form textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    .contact-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: auto;
+    min-width: 170px;
+    padding: 0.75rem 1.4rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    }
+
+    .form-submit-row {
+    text-align: center;
+    margin-top: 1.25rem;
+    }
+
+    .contact-submit:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+    }
+
+    .contact-honeypot {
+        display: none;
+    }
+
+    /* Contact profile links */
     .contact-links {
         display: flex;
         justify-content: center;
         gap: 1rem;
         flex-wrap: wrap;
+        margin-top: 1.5rem;
     }
-    
+
     .contact-links a {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
         padding: 12px 24px;
         background: #0077b5;
         color: white;
@@ -794,11 +970,27 @@
         border-radius: 25px;
         transition: all 0.3s ease;
     }
-    
+
     .contact-links a:hover {
         background: #005885;
         transform: translateY(-2px);
     }
+
+    @media (max-width: 480px) {
+        .contact-form {
+            max-width: 100%;
+        }
+
+        .contact-links {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .contact-links a {
+            justify-content: center;
+        }
+    }
+    
     
     /* Footer */
     footer {
@@ -811,11 +1003,42 @@
     }
     
     /* Responsive Design */
-    @media (max-width: 768px) {
+    @media (max-width: 1300px) {
+        nav {
+            position: relative;
+        }
+
         .nav-links {
             display: none;
         }
-    
+
+        .mobile-nav-toggle {
+            display: inline-flex;
+            margin-right: 64px;
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: calc(100% + 0.6rem);
+            right: 84px;
+            left: auto;
+            width: min(260px, calc(100vw - 110px));
+            display: none;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0.65rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 12px 35px var(--shadow-hover);
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+    }
+
+    @media (max-width: 768px) {
         .hero h1 {
             font-size: 2rem;
         }
@@ -842,10 +1065,8 @@
         }
     
         .theme-toggle {
-            width: 45px;
-            height: 45px;
-            top: 15px;
-            right: 15px;
+            width: 42px;
+            height: 42px;
         }
     
         .konami-code {
@@ -1077,10 +1298,6 @@
     </style>
 </head>
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <i class="fas fa-sun" id="themeIcon"></i>
-    </button>
     <header>
         <nav class="container">
             <div class="logo" id="logoElement">Allegra Bourne</div>
@@ -1090,6 +1307,21 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-sun theme-icon"></i>
+            </button>
+            <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close navigation menu">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
         </nav>
     </header>
 
@@ -1100,20 +1332,6 @@
                 <h1>Allegra Bourne</h1>
                 <p>Senior Software Engineer and AI/Event Driven Solutions Specialist</p>
                 <p>Passionate about AI, IoT, and sustainable technology solutions</p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://www.credly.com/users/allegra-bourne/badges#credly" target="_blank" title="Credly">
-                        <i class="fas fa-certificate"></i>
-                    </a>
-                    <a href="https://www.coursera.org/learner/allegra-bourne" target="_blank" title="Coursera">
-                        <i class="fas fa-graduation-cap"></i>
-                    </a>
-                  <!--  <a href="https://github.com/allegrabourne" target="_blank" title="GitHub">
-                        <i class="fab fa-github"></i>  -->
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -1188,7 +1406,7 @@
 
         <div class="experience-timeline"><div class="experience-timeline-line"></div>
 
-            <div class="tl-dates"><span class="tl-date-end"><span class="tl-month">Jun</span><span class="tl-year">2026</span></span><span class="tl-date-start"><span class="tl-month">Jul</span><span class="tl-year">2022</span></span></div><div class="experience-item" data-dates="Jul 2022 – Jun 2026">
+            <div class="tl-dates"><span class="tl-date-end" id="currentTimelineEnd"></span><span class="tl-date-start"><span class="tl-month">Jul</span><span class="tl-year">2022</span></span></div><div class="experience-item" data-dates="Jul 2022 – Present" data-current-role="true" data-start-date="Jul 2022">
     <div class="experience-header">
         <div>
             <div class="experience-title">Senior Software Engineer</div>
@@ -1776,145 +1994,211 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
                 <h2>Qualifications and Certifications</h2>
                 <div class="certifications-grid">
                     <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="certification-title">IBM Data Science Professional Certificate</div>
-                        <div class="certification-issuer">IBM (2025)</div>
-                        <div class="certification-description">
-                            Comprehensive data science program covering data analysis, machine learning, and data visualization. Recognised by the American Council on Education (ACE) for 12 college credit recommendations. 
-                            <a href="https://www.acenet.edu/National-Guide/Pages/Course.aspx?org=IBM&cid=eb7d51c4-662b-ec11-b6e5-000d3a58e694" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer" 
-                                   style="color: #0066cc; text-decoration: none;">
-                                View ACE Credit Recommendation
-                            </a>
-                        </div>
-                        <div class="certification-skills">
-                            <span class="skill-badge">Python</span>
-                            <span class="skill-badge">Machine Learning</span>
-                            <span class="skill-badge">Data Analysis</span>
-                            <span class="skill-badge">SQL</span>
-                            <span class="skill-badge">Data Visualization</span>
-                            <span class="skill-badge">Statistics</span>
-                        </div>
-                        <a href="https://coursera.org/share/8bb16e2be758ad8fa926d95cb07e5388" target="_blank" class="certification-link">
-                            View Certificate
-                        </a>
-                    </div>
+                                            <div class="certification-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="certification-title">MSc Artificial Intelligence</div>
+                                            <div class="certification-issuer">University of Bath (Current student)</div>
+                                            <div class="certification-description">
+                                                    Postgraduate degree focused on the theory and application of artificial intelligence. 
+                                                    Covering intelligent systems, machine learning, natural language processing, and the ethical and practical 
+                                                    deployment of AI solutions across real-world domains. Research into application of AI in discreet field laboratories.
+                                                <br><br>
+                                                <em>Delivered by the University of Bath, ranked among the top 10 universities in the UK in the 2026 Guardian, Times, 
+                                                    and Daily Mail University Rankings.</em>
+                                            </div>
+                                            <div class="certification-skills">
+                                                <span class="skill-badge">Python</span>
+                                                <span class="skill-badge">SciKit-Learn</span>
+                                                <span class="skill-badge">PyTorch</span>
+                                                <span class="skill-badge">TensorFlow</span>
+                                                <span class="skill-badge">Linear Algebra</span>
+                                                <span class="skill-badge">Calculus</span>
+                                                <span class="skill-badge">Artificial Intelligence</span>
+                                                <span class="skill-badge">Machine Learning</span>
+                                                <span class="skill-badge">Data Science</span>
+                                                <span class="skill-badge">Ethical AI</span>
+                                                <span class="skill-badge">Intelligent Systems</span>
+                                                <span class="skill-badge">Neural Networks</span>
+                                                <span class="skill-badge">AI Fundementals</span>
+                                            </div>
+                                        </div>
 
                     <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="certification-title">IBM AI Developer Professional Certificate</div>
-                        <div class="certification-issuer">IBM (2024)</div>
-                        <div class="certification-description">
-                            Advanced AI development program focused on building and deploying AI applications. Covers natural language processing, computer vision, and AI application development using modern frameworks.
-                        </div>
-                        <div class="certification-skills">
-                            <span class="skill-badge">Artificial Intelligence</span>
-                            <span class="skill-badge">Deep Learning</span>
-                            <span class="skill-badge">Natural Language Processing</span>
-                            <span class="skill-badge">Computer Vision</span>
-                            <span class="skill-badge">AI Application Development</span>
-                            <span class="skill-badge">Model Deployment</span>
-                        </div>
-                        <a href="https://coursera.org/share/fefaa216f95bed18f6e0f1b26b50eee4" target="_blank" class="certification-link">
-                            View Certificate
-                        </a>
-                    </div>
+                                            <div class="certification-icon">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                            <div class="certification-title">IBM Data Science Professional Certificate</div>
+                                            <div class="certification-issuer">IBM (2025)</div>
+                                            <div class="certification-description">
+                                                Comprehensive data science program covering data analysis, machine learning, and data visualization. Recognised by the American Council on Education (ACE) for 12 college credit recommendations. 
+                                                <a href="https://www.acenet.edu/National-Guide/Pages/Course.aspx?org=IBM&cid=eb7d51c4-662b-ec11-b6e5-000d3a58e694" 
+                                                       target="_blank" 
+                                                       rel="noopener noreferrer" 
+                                                       style="color: #0066cc; text-decoration: none;">
+                                                    View ACE Credit Recommendation
+                                                </a>
+                                            </div>
+                                            <div class="certification-skills">
+                                                <span class="skill-badge">Python</span>
+                                                <span class="skill-badge">Machine Learning</span>
+                                                <span class="skill-badge">Data Analysis</span>
+                                                <span class="skill-badge">SQL</span>
+                                                <span class="skill-badge">Data Visualization</span>
+                                                <span class="skill-badge">Statistics</span>
+                                            </div>
+                                            <a href="https://coursera.org/share/8bb16e2be758ad8fa926d95cb07e5388" target="_blank" class="certification-link">
+                                                View Certificate
+                                            </a>
+                                        </div>
 
                     <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="certification-title">MSc Artificial Intelligence</div>
-                        <div class="certification-issuer">University of Bath (Current student)</div>
-                        <div class="certification-description">
-                                Postgraduate degree focused on the theory and application of artificial intelligence. 
-                                Covering intelligent systems, machine learning, natural language processing, and the ethical and practical 
-                                deployment of AI solutions across real-world domains. Research into application of AI in discreet field laboratories.
-                            <br><br>
-                            <em>Delivered by the University of Bath, ranked among the top 10 universities in the UK in the 2026 Guardian, Times, 
-                                and Daily Mail University Rankings.</em>
-                        </div>
-                        <div class="certification-skills">
-                            <span class="skill-badge">Python</span>
-                            <span class="skill-badge">SciKit-Learn</span>
-                            <span class="skill-badge">PyTorch</span>
-                            <span class="skill-badge">TensorFlow</span>
-                            <span class="skill-badge">Linear Algebra</span>
-                            <span class="skill-badge">Calculus</span>
-                            <span class="skill-badge">Artificial Intelligence</span>
-                            <span class="skill-badge">Machine Learning</span>
-                            <span class="skill-badge">Data Science</span>
-                            <span class="skill-badge">Ethical AI</span>
-                            <span class="skill-badge">Intelligent Systems</span>
-                            <span class="skill-badge">Neural Networks</span>
-                            <span class="skill-badge">AI Fundementals</span>
-                        </div>
-                    </div>
-                    
-                    <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div class="certification-title">BSc Business Computing 2:1 (hons)</div>
-                        <div class="certification-issuer">Teesside University (2008)</div>
-                        <div class="certification-description">
-                           A Washington Accord recognised undergraduate qualification with a major in Computer Science and a minor in Business Studies.
-                        </div>
-                        <div class="certification-skills">
-                            <span class="skill-badge">Java</span>
-                            <span class="skill-badge">Python</span>
-                            <span class="skill-badge">VB.Net</span>
-                            <span class="skill-badge">C#</span>
-                            <span class="skill-badge">TSQL</span>
-                            <span class="skill-badge">Database Systems</span>
-                            <span class="skill-badge">Advanced Web Scripting and APIs</span>
-                            <span class="skill-badge">Statistical Data Analysis</span>
-                            <span class="skill-badge">Data Warehousing</span>
-                            <span class="skill-badge">XHTML</span>
-                            <span class="skill-badge">CSS</span>
-                            <span class="skill-badge">JavaScript</span>
-                            <span class="skill-badge">Enterprise Systems Analysis</span>
-                            <span class="skill-badge">Project & Change Management</span>
-                            <span class="skill-badge">Business Analytics</span>
-                        </div>
-                    </div>
+                                            <div class="certification-icon">
+                                                <i class="fas fa-robot"></i>
+                                            </div>
+                                            <div class="certification-title">IBM AI Developer Professional Certificate</div>
+                                            <div class="certification-issuer">IBM (2024)</div>
+                                            <div class="certification-description">
+                                                Advanced AI development program focused on building and deploying AI applications. Covers natural language processing, computer vision, and AI application development using modern frameworks.
+                                            </div>
+                                            <div class="certification-skills">
+                                                <span class="skill-badge">Artificial Intelligence</span>
+                                                <span class="skill-badge">Deep Learning</span>
+                                                <span class="skill-badge">Natural Language Processing</span>
+                                                <span class="skill-badge">Computer Vision</span>
+                                                <span class="skill-badge">AI Application Development</span>
+                                                <span class="skill-badge">Model Deployment</span>
+                                            </div>
+                                            <a href="https://coursera.org/share/fefaa216f95bed18f6e0f1b26b50eee4" target="_blank" class="certification-link">
+                                                View Certificate
+                                            </a>
+                                        </div>
 
-                     <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <div class="certification-title">Internship</div>
-                        <div class="certification-issuer">State Street - Luxembourg (2007)</div>
-                        <div class="certification-description">
-                           One year internship with State Street Corporation. Worked on the development of a data warehousing solution which pooled various assets, funds and investment information from different locations throughout the world. This information would then be used for investment analysis, fund accounting and various other investment strategies.
-                        </div>
-                        <div class="certification-skills">
-                            <span class="skill-badge">Java</span>
-                            <span class="skill-badge">Oracle (Toad)</span>
-                            <span class="skill-badge">PL/SQL</span>
-                            <span class="skill-badge">Systems Integration</span>
-                        </div>
-                    </div>
-                </div>
+                    <div class="certification-card">
+                                            <div class="certification-icon">
+                                                <i class="fas fa-laptop-code"></i>
+                                            </div>
+                                            <div class="certification-title">BSc Business Computing 2:1 (hons)</div>
+                                            <div class="certification-issuer">Teesside University (2008)</div>
+                                            <div class="certification-description">
+                                               A Washington Accord recognised undergraduate qualification with a major in Computer Science and a minor in Business Studies.
+                                            </div>
+                                            <div class="certification-skills">
+                                                <span class="skill-badge">Java</span>
+                                                <span class="skill-badge">Python</span>
+                                                <span class="skill-badge">VB.Net</span>
+                                                <span class="skill-badge">C#</span>
+                                                <span class="skill-badge">TSQL</span>
+                                                <span class="skill-badge">Database Systems</span>
+                                                <span class="skill-badge">Advanced Web Scripting and APIs</span>
+                                                <span class="skill-badge">Statistical Data Analysis</span>
+                                                <span class="skill-badge">Data Warehousing</span>
+                                                <span class="skill-badge">XHTML</span>
+                                                <span class="skill-badge">CSS</span>
+                                                <span class="skill-badge">JavaScript</span>
+                                                <span class="skill-badge">Enterprise Systems Analysis</span>
+                                                <span class="skill-badge">Project & Change Management</span>
+                                                <span class="skill-badge">Business Analytics</span>
+                                            </div>
+                                        </div>
+
+                    <div class="certification-card">
+                                            <div class="certification-icon">
+                                                <i class="fas fa-briefcase"></i>
+                                            </div>
+                                            <div class="certification-title">Internship</div>
+                                            <div class="certification-issuer">State Street - Luxembourg (2007)</div>
+                                            <div class="certification-description">
+                                               One year internship with State Street Corporation. Worked on the development of a data warehousing solution which pooled various assets, funds and investment information from different locations throughout the world. This information would then be used for investment analysis, fund accounting and various other investment strategies.
+                                            </div>
+                                            <div class="certification-skills">
+                                                <span class="skill-badge">Java</span>
+                                                <span class="skill-badge">Oracle (Toad)</span>
+                                                <span class="skill-badge">PL/SQL</span>
+                                                <span class="skill-badge">Systems Integration</span>
+                                            </div>
+                                        </div>
+                                </div>
             </div>
         </section>
 
 
-        <section id="contact" class="section">
+       <section id="contact" class="section">
             <div class="container">
                 <h2>Get In Touch</h2>
-                <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                    <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #666;">
-                        I'm always interested in new opportunities and collaborations. Whether you'd like to discuss a project, share ideas about AI and conservation, or just say hello, I'd love to hear from you.
+
+                <div class="contact-content">
+                    <p>
+                        I'm always interested in new opportunities and collaborations. Whether you'd like to discuss a project,
+                        share ideas about AI and conservation, or just say hello, I'd love to hear from you.
                     </p>
-                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" style="display: inline-block; padding: 12px 24px; background: #0077b5; color: white; text-decoration: none; border-radius: 25px; transition: all 0.3s ease;">
+
+                    <form 
+                        action="https://formspree.io/f/xdajovbq" 
+                        method="POST" 
+                        class="contact-form"
+                    >
+                        <!-- Honeypot field for basic bot protection -->
+                        <input 
+                            type="text" 
+                            name="_gotcha" 
+                            class="contact-honeypot" 
+                            tabindex="-1" 
+                            autocomplete="off"
+                        >
+
+                        <div class="form-group">
+                            <label for="contactName">Your name</label>
+                            <input 
+                                id="contactName" 
+                                type="text" 
+                                name="name" 
+                                placeholder="Your name" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactEmail">Your email</label>
+                            <input 
+                                id="contactEmail" 
+                                type="email" 
+                                name="email" 
+                                placeholder="you@example.com" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactMessage">Your message</label>
+                            <textarea 
+                                id="contactMessage" 
+                                name="message" 
+                                rows="6" 
+                                placeholder="Write your message here..." 
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-submit-row">
+                            <button type="submit" class="contact-submit">
+                                <i class="fas fa-paper-plane"></i>
+                                Send message
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/allegrabourne/" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+
+                        <a href="https://www.credly.com/users/allegra-bourne/badges#credly" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-certificate"></i> Credly
+                        </a>
+
+                        <a href="https://www.coursera.org/learner/allegra-bourne" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-graduation-cap"></i> Coursera
                         </a>
                     </div>
                 </div>
@@ -1947,7 +2231,21 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
     </div>
 
     <script>
-         document.getElementById("current-year").textContent = new Date().getFullYear();
+        const now = new Date();
+        document.getElementById("current-year").textContent = now.getFullYear();
+
+        const currentTimelineEnd = document.getElementById("currentTimelineEnd");
+        const currentRole = document.querySelector('[data-current-role="true"]');
+        if (currentTimelineEnd) {
+            const currentMonth = now.toLocaleString("en-GB", { month: "short" });
+            const currentYear = now.getFullYear();
+            currentTimelineEnd.innerHTML = `<span class="tl-current-date">${currentMonth} ${currentYear}</span><span class="tl-present">(present)</span>`;
+
+            if (currentRole) {
+                const startDate = currentRole.getAttribute("data-start-date") || "Jul 2022";
+                currentRole.setAttribute("data-dates", `${startDate} – ${currentMonth} ${currentYear} (present)`);
+            }
+        }
     </script>
 
     <script>
@@ -2136,7 +2434,147 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
     </script>
 
     <script>
-        let konamiCount=0,clickCount=0;const body=document.body,themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('themeIcon'),getPreferredTheme=()=>window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light',setThemeIcon=theme=>{themeIcon.className=theme==='dark'?'fas fa-sun':'fas fa-moon'},toggleTheme=()=>{const currentTheme=body.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';body.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);setThemeIcon(newTheme)};document.addEventListener('DOMContentLoaded',()=>{const savedTheme=localStorage.getItem('theme')||getPreferredTheme();body.setAttribute('data-theme',savedTheme);setThemeIcon(savedTheme);window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{if(!localStorage.getItem('theme')){const newTheme=e.matches?'dark':'light';body.setAttribute('data-theme',newTheme);setThemeIcon(newTheme)}});themeToggle.addEventListener('click',toggleTheme)});let konamiCode=[];const secretSequence=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];document.addEventListener('keydown',function(e){console.log('Key pressed:',e.code);konamiCode.push(e.code);konamiCount++;if(konamiCode.length>secretSequence.length)konamiCode.shift();console.log('Current sequence:',konamiCode);console.log('Target sequence:',secretSequence);if(konamiCode.join(',')==secretSequence.join(',')){console.log('Konami code activated!');showCluePage()}});document.addEventListener('DOMContentLoaded',function(){const logo=document.getElementById('logoElement');let logoClickCount=0,resetTimeout;logo.addEventListener('click',function(e){e.preventDefault();logoClickCount++;clickCount++;console.log('Logo clicked:',logoClickCount,'times');if(logoClickCount===7){console.log('Logo clicked 7 times - showing clue page!');showCluePage();return}clearTimeout(resetTimeout);resetTimeout=setTimeout(()=>{logoClickCount=0;console.log('Logo click counter reset')},3000)})});function showCluePage(){window.location.href='/clue/psst.html'}document.addEventListener('DOMContentLoaded',function(){const links=document.querySelectorAll('a[href^="#"]');links.forEach(link=>{link.addEventListener('click',function(e){e.preventDefault();const targetId=this.getAttribute('href');if(targetId){const targetElement=document.querySelector(targetId);if(targetElement)targetElement.scrollIntoView({behavior:'smooth',block:'start'})}})})});console.log('%c🔍 Looking for something?','color: #667eea; font-size: 16px; font-weight: bold;');console.log('%cTry the classic: ↑↑↓↓←→←→BA','color: #764ba2; font-size: 12px;');console.log('%cOr click my name 7 times in 3 seconds...','color: #d4af37; font-size: 12px;');
+        let konamiCount = 0;
+        let clickCount = 0;
+
+        const body = document.body;
+        const themeButtons = document.querySelectorAll('.theme-toggle');
+        const themeIcons = document.querySelectorAll('.theme-icon');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        const getPreferredTheme = () =>
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+        const setThemeIcon = theme => {
+            themeIcons.forEach(icon => {
+                icon.className = theme === 'dark'
+                    ? 'fas fa-sun theme-icon'
+                    : 'fas fa-moon theme-icon';
+            });
+        };
+
+        const toggleTheme = () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            setThemeIcon(newTheme);
+        };
+
+        const closeMobileMenu = () => {
+            if (!mobileMenu || !mobileNavToggle) return;
+            mobileMenu.classList.remove('open');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            mobileNavToggle.classList.remove('menu-open');
+            mobileNavToggle.setAttribute('aria-expanded', 'false');
+            mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || getPreferredTheme();
+            body.setAttribute('data-theme', savedTheme);
+            setThemeIcon(savedTheme);
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    body.setAttribute('data-theme', newTheme);
+                    setThemeIcon(newTheme);
+                }
+            });
+
+            themeButtons.forEach(button => button.addEventListener('click', toggleTheme));
+
+            if (mobileNavToggle && mobileMenu) {
+                mobileNavToggle.addEventListener('click', () => {
+                    const isOpen = mobileMenu.classList.toggle('open');
+                    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+                    mobileNavToggle.classList.toggle('menu-open', isOpen);
+                    mobileNavToggle.setAttribute('aria-expanded', String(isOpen));
+                    mobileNavToggle.setAttribute('aria-label', isOpen ? 'Navigation menu open' : 'Open navigation menu');
+                });
+
+                if (mobileNavClose) {
+                    mobileNavClose.addEventListener('click', closeMobileMenu);
+                }
+
+                mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+
+                document.addEventListener('click', event => {
+                    if (!mobileMenu.classList.contains('open')) return;
+                    if (!mobileMenu.contains(event.target) && !mobileNavToggle.contains(event.target)) {
+                        closeMobileMenu();
+                    }
+                });
+            }
+        });
+
+        let konamiCode = [];
+        const secretSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.code);
+            konamiCount++;
+            if (konamiCode.length > secretSequence.length) konamiCode.shift();
+
+            if (konamiCode.join(',') === secretSequence.join(',')) {
+                showCluePage();
+            }
+
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const logo = document.getElementById('logoElement');
+            let logoClickCount = 0;
+            let resetTimeout;
+
+            logo.addEventListener('click', function(e) {
+                e.preventDefault();
+                logoClickCount++;
+                clickCount++;
+
+                if (logoClickCount === 7) {
+                    showCluePage();
+                    return;
+                }
+
+                clearTimeout(resetTimeout);
+                resetTimeout = setTimeout(() => {
+                    logoClickCount = 0;
+                }, 3000);
+            });
+        });
+
+        function showCluePage() {
+            window.location.href = '/clue/psst.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId) {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+        });
+
+        console.log('%c🔍 Looking for something?', 'color: #667eea; font-size: 16px; font-weight: bold;');
+        console.log('%cTry the classic: ↑↑↓↓←→←→BA', 'color: #764ba2; font-size: 12px;');
+        console.log('%cOr click my name 7 times in 3 seconds...', 'color: #d4af37; font-size: 12px;');
     </script>
 </body>
 </html>
