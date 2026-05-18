@@ -1923,10 +1923,10 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Allegra Bourne. All rights reserved.</p>
+       <div class="container">
+            <p>&copy; <span id="current-year"></span> Allegra Bourne. All rights reserved.</p>
             <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 0.5rem;">
-                <!-- For the curious: ↑↑↓↓←→←→BA or click my name 7 times -->
+            <!-- For the curious: ↑↑↓↓←→←→BA or click my name 7 times -->
             </p>
         </div>
     </footer>
@@ -1945,6 +1945,10 @@ The system indexes academic papers, research notes and codebases with a FAISS ve
             <div class="carousel-hint" id="galleryHint">Use ← → arrow keys to navigate</div>
         </div>
     </div>
+
+    <script>
+         document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
 
     <script>
         function toggleDetails(btn) {
