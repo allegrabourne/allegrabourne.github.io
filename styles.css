@@ -968,7 +968,7 @@
         transform: translateY(-2px);
     }
 
-   .professional-site-callout {
+    .professional-site-callout {
     max-width: 640px;
     margin: 0 auto 2rem;
     text-align: center;
@@ -980,32 +980,16 @@
         color: var(--text-secondary);
     }
 
-    .professional-site-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 0.25rem;
-        padding: 0.45rem 1rem;
-        background: var(--primary-color);
-        color: white;
+    .professional-site-callout a {
+        color: #0066cc;
         text-decoration: none;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        white-space: nowrap;
     }
 
-    .professional-site-link:hover {
-        background: var(--primary-hover);
-        transform: translateY(-2px);
+    .professional-site-callout a:hover {
+        text-decoration: underline;
     }
 
-    @media (max-width: 640px) {
-        .professional-site-link {
-            margin-top: 0.75rem;
-            margin-left: 0;
-        }
-    }
+ 
 
     @media (max-width: 480px) {
         .contact-form {
