@@ -969,9 +969,14 @@
     }
 
     .professional-site-callout {
-    max-width: 640px;
-    margin: 0 auto 2rem;
-    text-align: center;
+        max-width: 640px;
+        margin: 0 auto 2rem;
+        padding: 0;
+        text-align: center;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
     }
 
     .professional-site-callout p {
@@ -980,13 +985,15 @@
         color: var(--text-secondary);
     }
 
-    .professional-site-callout a {
+    .professional-site-callout a,
+    .professional-site-callout a:visited,
+    .professional-site-callout a:hover,
+    .professional-site-callout a:active {
         color: #0066cc;
         text-decoration: none;
-    }
-
-    .professional-site-callout a:hover {
-        text-decoration: underline;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
     }
 
  
