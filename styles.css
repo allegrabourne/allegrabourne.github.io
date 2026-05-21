@@ -314,7 +314,7 @@
     }
 
     .hero h1 {
-        margin: 0 0 1.25rem;
+        margin: 1.25rem 0 1.25rem;
         font-size: clamp(2rem, 5vw, 5rem);
         line-height: 0.98;
         font-weight: 850;
@@ -324,7 +324,7 @@
     }
 
     .hero p {
-        margin: 0 0 0.9rem;
+        margin: 1.25rem 0 0.9rem;
         font-size: clamp(1.05rem, 2vw, 1.22rem);
         line-height: 1.5;
     }
@@ -513,7 +513,6 @@
             width: 100%;
             max-width: 100%;
             gap: 1.75rem;
-            overflow-x: hidden;
         }
 
         .hero-main {
