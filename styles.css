@@ -264,36 +264,50 @@
     
     /* Hero Section */
     .hero {
-        padding: 120px 0 80px;
-        text-align: center;
-        color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 140px 0 100px;
+    text-align: center;
+    color: white;
+    background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(118, 75, 162, 0.35), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(102, 126, 234, 0.35), transparent 32%),
+        linear-gradient(135deg, #1f2440 0%, #3f3463 45%, #667eea 100%);
     }
-    
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.18;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+        background-size: 42px 42px;
+        pointer-events: none;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        width: 520px;
+        height: 170px;
+        right: -120px;
+        top: 120px;
+        opacity: 0.22;
+        background:
+            radial-gradient(circle at 18% 60%, #fff 0 38px, transparent 40px),
+            radial-gradient(circle at 34% 42%, #fff 0 58px, transparent 60px),
+            radial-gradient(circle at 55% 55%, #fff 0 48px, transparent 50px),
+            radial-gradient(circle at 75% 60%, #fff 0 36px, transparent 38px);
+        filter: blur(1px);
+        pointer-events: none;
+    }
+
     .hero-content {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    
-    .profile-img {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 5px solid rgba(255, 255, 255, 0.3);
-        margin-bottom: 2rem;
-        object-fit: cover;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        opacity: 0.9;
+        position: relative;
+        z-index: 1;
     }
     
     .social-links {
@@ -665,6 +679,37 @@
 
     .tl-dates::after {
         bottom: 1.6rem;
+    }
+
+    /* Subtle experience timeline hover */
+    .experience-item:hover {
+        transform: translateY(-3px);
+        border-color: rgba(102, 126, 234, 0.55);
+        box-shadow: 0 12px 28px var(--shadow-hover);
+    }
+
+    /* Highlight the date block immediately before the hovered card */
+    .tl-dates:has(+ .experience-item:hover) .tl-date-end,
+    .tl-dates:has(+ .experience-item:hover) .tl-date-start {
+        color: var(--primary-color);
+        opacity: 1;
+        transform: translateX(-3px);
+    }
+
+    /* Highlight the tick marks for the active role */
+    .tl-dates:has(+ .experience-item:hover)::before,
+    .tl-dates:has(+ .experience-item:hover)::after {
+        width: 14px;
+        background: var(--primary-color);
+        box-shadow: 0 0 12px rgba(102, 126, 234, 0.45);
+    }
+
+    .tl-dates,
+    .tl-date-end,
+    .tl-date-start,
+    .tl-dates::before,
+    .tl-dates::after {
+        transition: all 0.25s ease;
     }
 
     .experience-item {
