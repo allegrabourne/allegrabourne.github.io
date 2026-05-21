@@ -307,14 +307,14 @@
     .hero-eyebrow {
         margin: 0 0 1rem;
         color: rgba(255, 255, 255, 0.78);
-        font-size: 0.84rem;
+        font-size: 0.92rem;
         font-weight: 800;
         letter-spacing: 0.14em;
         text-transform: uppercase;
     }
 
     .hero h1 {
-        margin: 1.25rem 0 1.25rem;
+        margin: 3rem 0 1.5rem;
         font-size: clamp(2rem, 5vw, 5rem);
         line-height: 0.98;
         font-weight: 850;
@@ -325,7 +325,6 @@
 
     .hero p {
         margin: 1.25rem 0 0.9rem;
-        font-size: clamp(1.05rem, 2vw, 1.22rem);
         line-height: 1.5;
     }
 
@@ -531,7 +530,6 @@
         }
 
         .hero p {
-            font-size: 1.02rem;
             margin-left: auto;
             margin-right: auto;
         }
