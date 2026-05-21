@@ -290,108 +290,63 @@
     .hero::after {
         content: '';
         position: absolute;
-        width: 560px;
-        height: 560px;
-        right: -180px;
-        top: 70px;
-        opacity: 0.16;
+        right: -120px;
+        top: 120px;
+        width: 620px;
+        height: 620px;
+        opacity: 0.14;
         background:
-            radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95) 0 58px, transparent 60px),
-            radial-gradient(circle at 58% 42%, rgba(255, 255, 255, 0.75) 0 94px, transparent 96px),
-            radial-gradient(circle at 42% 66%, rgba(255, 255, 255, 0.62) 0 72px, transparent 74px),
-            radial-gradient(circle at 70% 68%, rgba(255, 255, 255, 0.48) 0 44px, transparent 46px);
-        filter: blur(1px);
+            radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.85) 0 64px, transparent 66px),
+            radial-gradient(circle at 58% 36%, rgba(255, 255, 255, 0.62) 0 108px, transparent 110px),
+            radial-gradient(circle at 42% 72%, rgba(255, 255, 255, 0.45) 0 88px, transparent 90px),
+            radial-gradient(circle at 78% 66%, rgba(255, 255, 255, 0.34) 0 58px, transparent 60px);
         pointer-events: none;
     }
 
     .hero-content {
         position: relative;
         z-index: 1;
-        max-width: 960px;
+        max-width: 1180px;
         margin: 0 auto;
-        text-align: center;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+        gap: 3rem;
+        align-items: center;
     }
 
     .hero-main {
-        position: relative;
         max-width: 760px;
-        margin: 0 auto;
     }
 
-    /* Profile image and background circle cluster */
-    .hero-orbit {
-        position: relative;
-        width: 230px;
-        height: 230px;
-        margin: 0 auto 2.25rem;
-    }
-
-    .hero-orb {
-        position: absolute;
-        display: block;
-        border-radius: 50%;
-        pointer-events: none;
-        background:
-            radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.08) 62%, transparent 70%);
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        box-shadow:
-            inset 0 0 24px rgba(255, 255, 255, 0.08),
-            0 16px 40px rgba(0, 0, 0, 0.18);
-    }
-
-    .hero-orb-one {
-        width: 92px;
-        height: 92px;
-        left: -24px;
-        top: 28px;
-        opacity: 0.34;
-    }
-
-    .hero-orb-two {
-        width: 62px;
-        height: 62px;
-        right: -6px;
-        top: 10px;
-        opacity: 0.28;
-    }
-
-    .hero-orb-three {
-        width: 118px;
-        height: 118px;
-        right: -36px;
-        bottom: 10px;
-        opacity: 0.22;
+    .hero-visual {
+        margin-bottom: 2rem;
     }
 
     .hero .profile-img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        z-index: 2;
         display: block;
         width: 170px;
         height: 170px;
-        transform: translate(-50%, -50%);
         border-radius: 50%;
-        border: 5px solid rgba(255, 255, 255, 0.26);
+        border: 5px solid rgba(255, 255, 255, 0.24);
         object-fit: cover;
         box-shadow:
-            0 14px 38px rgba(0, 0, 0, 0.3),
-            0 0 0 18px rgba(255, 255, 255, 0.035),
-            0 0 54px rgba(255, 255, 255, 0.14);
+            0 14px 38px rgba(0, 0, 0, 0.28),
+            0 0 0 14px rgba(255, 255, 255, 0.03),
+            0 0 44px rgba(255, 255, 255, 0.1);
     }
 
     .hero h1 {
-        font-size: clamp(2.6rem, 6vw, 4.4rem);
-        line-height: 1.05;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        line-height: 1.03;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.35);
     }
 
     .hero p {
         font-size: 1.15rem;
-        margin-bottom: 0.65rem;
+        margin-bottom: 0.7rem;
         opacity: 0.92;
+        max-width: 720px;
     }
 
     .hero-role {
@@ -432,59 +387,196 @@
         opacity: 0.85;
     }
 
-    @media (max-width: 768px) {
+    /* Thought bubble area */
+    .hero-thought-cloud {
+        position: relative;
+        min-height: 360px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .trail-circle {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+            inset 0 0 22px rgba(255, 255, 255, 0.03),
+            0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* These create the "thought bubble" trail from the image to the content */
+    .trail-circle-1 {
+        width: 38px;
+        height: 38px;
+        left: -46px;
+        top: 62px;
+        opacity: 0.22;
+    }
+
+    .trail-circle-2 {
+        width: 60px;
+        height: 60px;
+        left: -4px;
+        top: 30px;
+        opacity: 0.18;
+    }
+
+    .trail-circle-3 {
+        width: 128px;
+        height: 128px;
+        left: 46px;
+        top: 72px;
+        opacity: 0.13;
+    }
+
+    .trail-circle-4 {
+        width: 188px;
+        height: 188px;
+        right: 38px;
+        top: 6px;
+        opacity: 0.14;
+    }
+
+    .trail-circle-5 {
+        width: 150px;
+        height: 150px;
+        right: 0;
+        bottom: 18px;
+        opacity: 0.11;
+    }
+
+    .hero-focus-cloud {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        max-width: 420px;
+        align-items: flex-start;
+    }
+
+    .hero-focus-title {
+        width: 100%;
+        margin: 0 0 0.35rem;
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .focus-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.8rem 1rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 0.95rem;
+        line-height: 1.35;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .focus-pill:nth-of-type(2) {
+        margin-left: 1rem;
+    }
+
+    .focus-pill:nth-of-type(4) {
+        margin-left: 2rem;
+    }
+
+    .focus-pill:nth-of-type(5) {
+        margin-left: 0.5rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 960px) {
+        .hero-content {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .hero-main {
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .hero .profile-img {
+            margin: 0 auto;
+        }
+
+        .hero p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-thought-cloud {
+            min-height: 280px;
+            justify-content: center;
+        }
+
+        .hero-focus-cloud {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-focus-title {
+            text-align: center;
+        }
+
+        .focus-pill:nth-of-type(2),
+        .focus-pill:nth-of-type(4),
+        .focus-pill:nth-of-type(5) {
+            margin-left: 0;
+        }
+
+        .trail-circle-1 {
+            left: 14%;
+            top: 10px;
+        }
+
+        .trail-circle-2 {
+            left: 24%;
+            top: 46px;
+        }
+
+        .trail-circle-3 {
+            left: 36%;
+            top: 86px;
+        }
+    }
+
+    @media (max-width: 600px) {
         .hero {
             padding: 125px 0 95px;
         }
 
-        .hero-orbit {
-            width: 205px;
-            height: 205px;
-            margin-bottom: 2rem;
-        }
-
         .hero .profile-img {
-            width: 150px;
-            height: 150px;
-        }
-
-        .hero-orb-one {
-            width: 78px;
-            height: 78px;
-            left: -12px;
-        }
-
-        .hero-orb-two {
-            width: 52px;
-            height: 52px;
-            right: 0;
-        }
-
-        .hero-orb-three {
-            width: 96px;
-            height: 96px;
-            right: -18px;
+            width: 145px;
+            height: 145px;
         }
 
         .hero p {
             font-size: 1.05rem;
         }
-    }
-
-    @media (max-width: 480px) {
-        .hero-orbit {
-            width: 185px;
-            height: 185px;
-        }
-
-        .hero .profile-img {
-            width: 135px;
-            height: 135px;
-        }
 
         .hero-service-link {
             font-size: 0.88rem;
             padding: 0.65rem 1rem;
+        }
+
+        .focus-pill {
+            font-size: 0.9rem;
+            padding: 0.72rem 0.95rem;
+        }
+
+        .hero-thought-cloud {
+            min-height: 240px;
         }
     }
     
