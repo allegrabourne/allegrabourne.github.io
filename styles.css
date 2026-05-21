@@ -262,7 +262,7 @@
         color: var(--primary-color);
     }
     
-    /* Hero Section */
+   /* Hero Section */
     .hero {
         position: relative;
         overflow: hidden;
@@ -361,18 +361,18 @@
         opacity: 0.9;
     }
 
-    /* Thought Cluster */
+    /* Thought cluster */
     .hero-thought-cluster {
         position: relative;
-        min-height: 560px;
+        min-height: 640px;
     }
 
     .thought-cluster-tagline {
         position: absolute;
         top: 0;
-        left: 245px;
+        left: 250px;
         margin: 0;
-        z-index: 5;
+        z-index: 10;
         color: rgba(255, 255, 255, 0.82);
         font-size: 0.88rem;
         font-weight: 800;
@@ -380,19 +380,19 @@
         text-transform: uppercase;
     }
 
-    /* Origin */
+    /* Origin area */
     .thought-origin {
         position: absolute;
         left: 10px;
-        top: 185px;
-        width: 310px;
-        height: 240px;
+        top: 205px;
+        width: 360px;
+        height: 270px;
     }
 
     .thought-avatar {
         position: absolute;
         left: 0;
-        top: 35px;
+        top: 40px;
         width: 190px;
         height: 190px;
         border-radius: 50%;
@@ -403,7 +403,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 4;
+        z-index: 6;
     }
 
     .thought-avatar .profile-img {
@@ -417,7 +417,7 @@
             0 0 0 10px rgba(255, 255, 255, 0.03);
     }
 
-    /* Small linking bubbles */
+    /* Thought trail */
     .trail {
         position: absolute;
         border-radius: 50%;
@@ -429,97 +429,203 @@
     }
 
     .trail-1 {
-        width: 22px;
-        height: 22px;
-        left: 204px;
-        top: 124px;
+        width: 18px;
+        height: 18px;
+        left: 210px;
+        top: 150px;
     }
 
     .trail-2 {
-        width: 38px;
-        height: 38px;
-        left: 242px;
-        top: 98px;
+        width: 30px;
+        height: 30px;
+        left: 246px;
+        top: 126px;
     }
 
     .trail-3 {
-        width: 56px;
-        height: 56px;
-        left: 292px;
-        top: 66px;
+        width: 46px;
+        height: 46px;
+        left: 290px;
+        top: 94px;
     }
 
     .trail-4 {
-        width: 82px;
-        height: 82px;
-        left: 352px;
-        top: 20px;
+        width: 68px;
+        height: 68px;
+        left: 344px;
+        top: 44px;
+    }
+
+    .trail-5 {
+        width: 92px;
+        height: 92px;
+        left: 410px;
+        top: -6px;
     }
 
     /* Bubble field */
     .thought-bubbles {
         position: absolute;
-        inset: 52px 0 0 250px;
+        inset: 48px 0 0 255px;
     }
 
-    /* Shared bubble style */
+    /* Bubble shell */
     .thought-bubble {
         position: absolute;
+        overflow: visible;
+        isolation: isolate;
+        filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.12));
+    }
+
+    /* Main body of the thought bubble */
+    .thought-bubble::before {
+        content: '';
+        position: absolute;
+        left: 8%;
+        right: 8%;
+        top: 18%;
+        bottom: 10%;
+        background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 42% 44% 40% 38% / 36% 38% 44% 46%;
+        z-index: 1;
+    }
+
+    /* Soft highlight */
+    .thought-bubble::after {
+        content: '';
+        position: absolute;
+        left: 18%;
+        top: 26%;
+        width: 34%;
+        height: 18%;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        filter: blur(10px);
+        z-index: 2;
+    }
+
+    /* Lobes that make it a cloud shape */
+    .bubble-lobe {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        z-index: 0;
+    }
+
+    .thought-bubble .lobe-a {
+        width: 28%;
+        height: 28%;
+        left: 8%;
+        top: 18%;
+    }
+
+    .thought-bubble .lobe-b {
+        width: 34%;
+        height: 34%;
+        left: 24%;
+        top: 2%;
+    }
+
+    .thought-bubble .lobe-c {
+        width: 28%;
+        height: 28%;
+        right: 20%;
+        top: 10%;
+    }
+
+    .thought-bubble .lobe-d {
+        width: 22%;
+        height: 22%;
+        right: 6%;
+        top: 24%;
+    }
+
+    /* Text inside bubble */
+    .bubble-text {
+        position: absolute;
+        inset: 24% 16% 18% 16%;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 1.1rem 1.2rem;
         color: rgba(255, 255, 255, 0.96);
-        background: rgba(255, 255, 255, 0.10);
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .thought-bubble span {
-        display: block;
-        max-width: 88%;
         font-size: 0.95rem;
         font-weight: 600;
-        line-height: 1.28;
+        line-height: 1.26;
+        z-index: 3;
     }
 
-    /* More cloud-like shapes */
+    /* Individual bubble positions and sizes */
     .bubble-1 {
-        top: 14px;
-        left: 125px;
-        width: 255px;
-        height: 160px;
-        border-radius: 44% 56% 52% 48% / 46% 44% 56% 54%;
-        transform: rotate(-6deg);
+        top: 16px;
+        left: 110px;
+        width: 280px;
+        height: 200px;
+        transform: rotate(-5deg);
     }
 
     .bubble-2 {
-        top: 132px;
-        left: 255px;
-        width: 300px;
-        height: 200px;
-        border-radius: 52% 48% 45% 55% / 44% 50% 50% 56%;
-        transform: rotate(5deg);
+        top: 170px;
+        left: 270px;
+        width: 335px;
+        height: 230px;
+        transform: rotate(4deg);
     }
 
     .bubble-3 {
-        top: 330px;
-        left: 42px;
-        width: 300px;
-        height: 185px;
-        border-radius: 48% 52% 56% 44% / 50% 44% 56% 50%;
-        transform: rotate(-7deg);
+        top: 360px;
+        left: 30px;
+        width: 330px;
+        height: 225px;
+        transform: rotate(-6deg);
+        z-index: 2;
     }
 
     .bubble-4 {
-        top: 372px;
-        left: 255px;
-        width: 285px;
-        height: 175px;
-        border-radius: 46% 54% 50% 50% / 54% 48% 52% 46%;
-        transform: rotate(6deg);
+        top: 415px;
+        left: 290px;
+        width: 315px;
+        height: 210px;
+        transform: rotate(5deg);
+        z-index: 3;
+    }
+
+    /* Slightly different lobe arrangements per bubble */
+    .bubble-2 .lobe-b {
+        width: 30%;
+        height: 32%;
+        left: 26%;
+        top: 0;
+    }
+
+    .bubble-2 .lobe-c {
+        width: 30%;
+        height: 30%;
+        right: 16%;
+        top: 8%;
+    }
+
+    .bubble-3 .lobe-a {
+        width: 24%;
+        height: 24%;
+        left: 10%;
+        top: 20%;
+    }
+
+    .bubble-3 .lobe-b {
+        width: 36%;
+        height: 34%;
+        left: 22%;
+        top: 4%;
+    }
+
+    .bubble-4 .lobe-d {
+        width: 26%;
+        height: 24%;
+        right: 8%;
+        top: 22%;
     }
 
     /* Medium screens */
@@ -550,50 +656,49 @@
     /* Tablet */
     @media (max-width: 900px) {
         .hero-thought-cluster {
-            min-height: 520px;
+            min-height: 600px;
         }
 
         .thought-cluster-tagline {
             left: 220px;
-            top: 0;
             font-size: 0.82rem;
         }
 
         .thought-origin {
-            left: 0;
-            top: 185px;
-            transform: scale(0.95);
+            transform: scale(0.92);
             transform-origin: top left;
         }
 
         .thought-bubbles {
-            inset: 52px 0 0 215px;
+            inset: 52px 0 0 220px;
         }
 
         .bubble-1 {
-            width: 220px;
-            height: 150px;
+            width: 240px;
+            height: 180px;
+            left: 85px;
         }
 
         .bubble-2 {
+            width: 285px;
+            height: 205px;
             left: 220px;
-            width: 260px;
-            height: 180px;
         }
 
         .bubble-3 {
-            width: 255px;
-            height: 170px;
+            width: 275px;
+            height: 195px;
+            left: 25px;
         }
 
         .bubble-4 {
-            left: 215px;
-            width: 245px;
-            height: 162px;
+            width: 270px;
+            height: 190px;
+            left: 225px;
         }
 
-        .thought-bubble span {
-            font-size: 0.9rem;
+        .bubble-text {
+            font-size: 0.88rem;
         }
     }
 
@@ -626,7 +731,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 520px;
+            max-width: 540px;
         }
 
         .thought-cluster-tagline {
@@ -641,7 +746,7 @@
             top: auto;
             width: 100%;
             height: 190px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.1rem;
             transform: none;
         }
 
@@ -658,10 +763,7 @@
             height: 142px;
         }
 
-        .trail-1,
-        .trail-2,
-        .trail-3,
-        .trail-4 {
+        .trail {
             display: none;
         }
 
@@ -679,27 +781,16 @@
             top: auto;
             left: auto;
             width: 100%;
-            min-height: 130px;
+            height: 175px;
             transform: none;
-            padding: 1rem 0.95rem;
         }
 
-        .bubble-1,
-        .bubble-2,
-        .bubble-3,
-        .bubble-4 {
-            height: auto;
-            border-radius: 42% 58% 49% 51% / 50% 44% 56% 50%;
-        }
-
-        .thought-bubble span {
-            max-width: 92%;
-            font-size: 0.92rem;
-            line-height: 1.25;
+        .bubble-text {
+            inset: 24% 13% 18% 13%;
+            font-size: 0.9rem;
         }
     }
 
-    /* Narrow mobile */
     @media (max-width: 520px) {
         .thought-bubbles {
             grid-template-columns: 1fr 1fr;
@@ -707,12 +798,12 @@
         }
 
         .thought-bubble {
-            min-height: 120px;
-            padding: 0.95rem 0.85rem;
+            height: 160px;
         }
 
-        .thought-bubble span {
-            font-size: 0.86rem;
+        .bubble-text {
+            font-size: 0.84rem;
+            line-height: 1.22;
         }
     }
     
