@@ -269,20 +269,20 @@
         padding: clamp(7.5rem, 10vw, 9.5rem) 0 clamp(5rem, 8vw, 7rem);
         color: white;
         background:
-            radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.10), transparent 24%),
-            radial-gradient(circle at 82% 18%, rgba(118, 75, 162, 0.22), transparent 28%),
-            radial-gradient(circle at 50% 90%, rgba(102, 126, 234, 0.26), transparent 32%),
-            linear-gradient(135deg, #1f2440 0%, #3f3463 45%, #667eea 100%);
+            radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.08), transparent 24%),
+            radial-gradient(circle at 82% 18%, rgba(118, 75, 162, 0.18), transparent 28%),
+            radial-gradient(circle at 50% 90%, rgba(102, 126, 234, 0.22), transparent 32%),
+            linear-gradient(135deg, #242746 0%, #433c73 48%, #6876d9 100%);
     }
 
     .hero::before {
         content: '';
         position: absolute;
         inset: 0;
-        opacity: 0.16;
+        opacity: 0.14;
         background-image:
-            linear-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+            linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
         background-size: 42px 42px;
         pointer-events: none;
     }
@@ -294,10 +294,10 @@
     .hero-content {
         position: relative;
         z-index: 1;
-        max-width: 1240px;
+        max-width: 1280px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: minmax(320px, 1fr) minmax(380px, 620px);
+        grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.05fr);
         gap: clamp(2rem, 4vw, 4rem);
         align-items: center;
     }
@@ -308,16 +308,16 @@
 
     .hero h1 {
         margin: 0 0 1rem;
-        font-size: clamp(3.2rem, 8vw, 5.8rem);
-        line-height: 0.98;
+        font-size: clamp(3.3rem, 8vw, 6rem);
+        line-height: 0.95;
         font-weight: 800;
         color: #ffffff;
         text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.34);
     }
 
     .hero p {
-        margin: 0 0 0.85rem;
-        font-size: clamp(1.05rem, 2vw, 1.2rem);
+        margin: 0 0 0.9rem;
+        font-size: clamp(1.05rem, 2vw, 1.22rem);
         line-height: 1.5;
         max-width: 40rem;
     }
@@ -336,7 +336,7 @@
         align-items: center;
         gap: 0.6rem;
         margin-top: 1.35rem;
-        padding: 0.8rem 1.35rem;
+        padding: 0.82rem 1.4rem;
         border-radius: 999px;
         color: rgba(255, 255, 255, 0.94);
         text-decoration: none;
@@ -364,30 +364,37 @@
     /* Thought Cluster */
     .hero-thought-cluster {
         position: relative;
-        width: 100%;
-        min-height: 510px;
+        min-height: 560px;
     }
 
     .thought-cluster-tagline {
         position: absolute;
-        top: 18px;
-        left: 250px;
+        top: 0;
+        left: 245px;
         margin: 0;
-        z-index: 4;
-        color: rgba(255, 255, 255, 0.78);
-        font-size: 0.84rem;
+        z-index: 5;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 0.88rem;
         font-weight: 800;
         letter-spacing: 0.14em;
         text-transform: uppercase;
     }
 
-    /* Avatar bubble */
+    /* Origin */
+    .thought-origin {
+        position: absolute;
+        left: 10px;
+        top: 185px;
+        width: 310px;
+        height: 240px;
+    }
+
     .thought-avatar {
         position: absolute;
-        left: 28px;
-        top: 190px;
-        width: 182px;
-        height: 182px;
+        left: 0;
+        top: 35px;
+        width: 190px;
+        height: 190px;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.10);
         box-shadow:
@@ -396,12 +403,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 3;
+        z-index: 4;
     }
 
     .thought-avatar .profile-img {
-        width: 150px;
-        height: 150px;
+        width: 156px;
+        height: 156px;
         border-radius: 50%;
         border: 5px solid rgba(255, 255, 255, 0.22);
         object-fit: cover;
@@ -410,48 +417,52 @@
             0 0 0 10px rgba(255, 255, 255, 0.03);
     }
 
-    /* Linking bubbles */
-    .cluster-trail {
+    /* Small linking bubbles */
+    .trail {
         position: absolute;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.10);
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow:
             inset 0 0 18px rgba(255, 255, 255, 0.03),
             0 10px 22px rgba(0, 0, 0, 0.08);
-        pointer-events: none;
-        z-index: 1;
     }
 
     .trail-1 {
-        width: 20px;
-        height: 20px;
-        left: 200px;
-        top: 262px;
+        width: 22px;
+        height: 22px;
+        left: 204px;
+        top: 124px;
     }
 
     .trail-2 {
-        width: 32px;
-        height: 32px;
-        left: 232px;
-        top: 238px;
+        width: 38px;
+        height: 38px;
+        left: 242px;
+        top: 98px;
     }
 
     .trail-3 {
-        width: 46px;
-        height: 46px;
-        left: 275px;
-        top: 207px;
+        width: 56px;
+        height: 56px;
+        left: 292px;
+        top: 66px;
     }
 
     .trail-4 {
-        width: 64px;
-        height: 64px;
-        left: 332px;
-        top: 164px;
+        width: 82px;
+        height: 82px;
+        left: 352px;
+        top: 20px;
     }
 
-    /* Idea bubbles */
+    /* Bubble field */
+    .thought-bubbles {
+        position: absolute;
+        inset: 52px 0 0 250px;
+    }
+
+    /* Shared bubble style */
     .thought-bubble {
         position: absolute;
         display: flex;
@@ -459,64 +470,67 @@
         justify-content: center;
         text-align: center;
         padding: 1.1rem 1.2rem;
+        color: rgba(255, 255, 255, 0.96);
         background: rgba(255, 255, 255, 0.10);
         border: 1px solid rgba(255, 255, 255, 0.14);
         backdrop-filter: blur(10px);
         box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
-        color: rgba(255, 255, 255, 0.95);
-        z-index: 2;
     }
 
     .thought-bubble span {
         display: block;
-        max-width: 86%;
-        font-size: 0.92rem;
+        max-width: 88%;
+        font-size: 0.95rem;
         font-weight: 600;
-        line-height: 1.35;
+        line-height: 1.28;
     }
 
-    /* Bubble placement */
+    /* More cloud-like shapes */
     .bubble-1 {
-        top: 54px;
-        left: 350px;
-        width: 240px;
-        height: 128px;
-        border-radius: 49% 51% 53% 47% / 45% 47% 53% 55%;
+        top: 14px;
+        left: 125px;
+        width: 255px;
+        height: 160px;
+        border-radius: 44% 56% 52% 48% / 46% 44% 56% 54%;
+        transform: rotate(-6deg);
     }
 
     .bubble-2 {
-        top: 168px;
-        left: 410px;
-        width: 245px;
-        height: 142px;
-        border-radius: 52% 48% 46% 54% / 50% 42% 58% 50%;
+        top: 132px;
+        left: 255px;
+        width: 300px;
+        height: 200px;
+        border-radius: 52% 48% 45% 55% / 44% 50% 50% 56%;
+        transform: rotate(5deg);
     }
 
     .bubble-3 {
-        top: 300px;
-        left: 300px;
-        width: 255px;
-        height: 145px;
-        border-radius: 50% 50% 54% 46% / 52% 46% 54% 48%;
+        top: 330px;
+        left: 42px;
+        width: 300px;
+        height: 185px;
+        border-radius: 48% 52% 56% 44% / 50% 44% 56% 50%;
+        transform: rotate(-7deg);
     }
 
     .bubble-4 {
-        top: 330px;
-        left: 430px;
-        width: 245px;
-        height: 138px;
-        border-radius: 46% 54% 50% 50% / 48% 54% 46% 52%;
+        top: 372px;
+        left: 255px;
+        width: 285px;
+        height: 175px;
+        border-radius: 46% 54% 50% 50% / 54% 48% 52% 46%;
+        transform: rotate(6deg);
     }
 
     /* Medium screens */
-    @media (max-width: 1150px) {
+    @media (max-width: 1180px) {
         .hero-content {
             grid-template-columns: 1fr;
             gap: 2.5rem;
         }
 
         .hero-main {
-            max-width: 760px;
+            max-width: 780px;
             margin: 0 auto;
             text-align: center;
         }
@@ -527,12 +541,63 @@
         }
 
         .hero-thought-cluster {
-            max-width: 680px;
+            max-width: 760px;
             margin: 0 auto;
+            width: 100%;
         }
     }
 
-    /* Mobile / smaller tablet */
+    /* Tablet */
+    @media (max-width: 900px) {
+        .hero-thought-cluster {
+            min-height: 520px;
+        }
+
+        .thought-cluster-tagline {
+            left: 220px;
+            top: 0;
+            font-size: 0.82rem;
+        }
+
+        .thought-origin {
+            left: 0;
+            top: 185px;
+            transform: scale(0.95);
+            transform-origin: top left;
+        }
+
+        .thought-bubbles {
+            inset: 52px 0 0 215px;
+        }
+
+        .bubble-1 {
+            width: 220px;
+            height: 150px;
+        }
+
+        .bubble-2 {
+            left: 220px;
+            width: 260px;
+            height: 180px;
+        }
+
+        .bubble-3 {
+            width: 255px;
+            height: 170px;
+        }
+
+        .bubble-4 {
+            left: 215px;
+            width: 245px;
+            height: 162px;
+        }
+
+        .thought-bubble span {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Mobile */
     @media (max-width: 760px) {
         .hero {
             padding: 7.25rem 0 4.75rem;
@@ -543,8 +608,8 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.6rem, 10vw, 4rem);
-            line-height: 1.02;
+            font-size: clamp(2.7rem, 11vw, 4.2rem);
+            line-height: 1;
         }
 
         .hero p {
@@ -561,29 +626,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
-            max-width: 420px;
+            max-width: 520px;
         }
 
         .thought-cluster-tagline {
             position: static;
-            margin-bottom: 0.25rem;
+            margin: 0 0 1rem;
             text-align: center;
         }
 
-        .cluster-trail {
-            display: none;
-        }
-
-        .thought-avatar,
-        .thought-bubble {
-            position: static;
+        .thought-origin {
+            position: relative;
+            left: auto;
+            top: auto;
+            width: 100%;
+            height: 190px;
+            margin-bottom: 1rem;
+            transform: none;
         }
 
         .thought-avatar {
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
             width: 170px;
             height: 170px;
-            margin-bottom: 0.25rem;
         }
 
         .thought-avatar .profile-img {
@@ -591,16 +658,61 @@
             height: 142px;
         }
 
-        .thought-bubble {
+        .trail-1,
+        .trail-2,
+        .trail-3,
+        .trail-4 {
+            display: none;
+        }
+
+        .thought-bubbles {
+            position: static;
+            inset: auto;
             width: 100%;
-            min-height: 110px;
-            padding: 1rem 1.1rem;
-            border-radius: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+        }
+
+        .thought-bubble {
+            position: relative;
+            top: auto;
+            left: auto;
+            width: 100%;
+            min-height: 130px;
+            transform: none;
+            padding: 1rem 0.95rem;
+        }
+
+        .bubble-1,
+        .bubble-2,
+        .bubble-3,
+        .bubble-4 {
+            height: auto;
+            border-radius: 42% 58% 49% 51% / 50% 44% 56% 50%;
         }
 
         .thought-bubble span {
             max-width: 92%;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+            line-height: 1.25;
+        }
+    }
+
+    /* Narrow mobile */
+    @media (max-width: 520px) {
+        .thought-bubbles {
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .thought-bubble {
+            min-height: 120px;
+            padding: 0.95rem 0.85rem;
+        }
+
+        .thought-bubble span {
+            font-size: 0.86rem;
         }
     }
     
