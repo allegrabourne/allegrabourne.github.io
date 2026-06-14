@@ -209,7 +209,7 @@
     }
 
     .mobile-nav-toggle.menu-open {
-        opacity: 0;
+        opacity: 90;
         pointer-events: none;
     }
 
